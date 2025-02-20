@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>client2</title>
+</head>
+<body>
+Client 2:
+<input type="text" id="messageInput" name="message">
+<button onclick="sendMessage()">Send Message</button>
+<div id="messages"></div> <!-- Display messages here -->
+
+</body>
+<script>
+    // Create WebSocket connection.
+    const socket = new WebSocket("ws://localhost:3000/");
+
+    // Connection opened
+    socket.addEventListener("open", () => {
+        console.log("Connected to WebSocket");
+    });
+
+    // Listen for messages
+    socket.addEventListener("message", async (event) => {
+        // Convert Blob to text
+        const message = event.data instanceof Blob ? await event.data.text() : event.data;
+
+        console.log("Message from server:", message);
+        document.getElementById("messages").innerHTML += `<p>${message}</p>`; // Display message
+    });
+
+    // Function to send message
+    const sendMessage = () => {
+        const messageInput = document.getElementById("messageInput").value;
+        if (messageInput.trim() !== "") {
+            socket.send(messageInput);
+            console.log("Sent:", messageInput);
+        } else {
+            console.log("Input is empty.");
+        }
+    };
+</script>
+</html>
