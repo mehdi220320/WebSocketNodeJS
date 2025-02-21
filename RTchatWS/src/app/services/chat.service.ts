@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ChatService {
   private socket: Socket;
-  private serverUrl = 'http://localhost:3000'; // Your Node.js server URL
+  private serverUrl = 'http://localhost:3000';
 
   constructor() {
     this.socket = io(this.serverUrl);

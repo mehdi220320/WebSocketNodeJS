@@ -17,7 +17,6 @@ app.get("/", (req, res) => {
     res.send("Socket.IO Server is running...");
 });
 
-// Store connected users
 let users = new Map();
 
 io.on("connection", (socket) => {
