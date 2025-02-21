@@ -8,4 +8,6 @@ const projectSchema = new mongoose.Schema({
     tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
 }, { timestamps: true });
 
-module.exports = mongoose.model("Project", projectSchema);
+const ProjectModel = mongoose.model("Project", projectSchema);
+
+module.exports = ProjectModel;
