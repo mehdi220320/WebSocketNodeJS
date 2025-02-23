@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 let users = new Map();
-
+let tasks=new Map();
 io.on("connection", (socket) => {
     console.log("A user connected:", socket.id);
 
@@ -27,7 +27,14 @@ io.on("connection", (socket) => {
         console.log(`${username} joined`);
         io.emit("userList", Array.from(users.values()));
     });
-
+    socket.on("sendTask", ({ id, title, description }) => {
+        const author = users.get(socket.id) || "Anonymous";
+        const task = new Task(id, title, description, author);
+        tasks.set(id, task);
+        console.log(`Task created: ${task.displayInfo()}`);
+        console.log(tasks)
+        io.emit("taskList", task );
+    });
     socket.on("sendMessage", (message) => {
         const sender = users.get(socket.id) || "Anonymous";
         console.log(`Message from ${sender}:`, message);
@@ -45,3 +52,17 @@ io.on("connection", (socket) => {
 server.listen(3000, () => {
     console.log("Socket.IO server running on port 3000");
 });
+
+
+class Task {
+    constructor(id, title, description, author) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.author = author;
+    }
+
+    displayInfo() {
+        return `Task${this.id}:  ${this.title} by ${this.author}`;
+    }
+}

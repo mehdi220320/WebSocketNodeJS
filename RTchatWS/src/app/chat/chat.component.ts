@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages: { sender: string; text: string }[] = [];
   userList: string[] = [];
   messageInput: string = '';
-  userName = 'Mohamed';
+  userName = '';
 
   private messagesSubscription!: Subscription;
   private usersSubscription!: Subscription;
@@ -24,16 +24,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.userName = params.get('name') || 'Guest'; // Default to 'Guest' if no name is provided
+      this.userName = params.get('name') || 'Guest';
     });
     this.chatService.joinChat(this.userName);
 
-    // Subscribe to incoming messages
     this.messagesSubscription = this.chatService.getMessages().subscribe((message) => {
       this.messages.push(message);
     });
-
-    // Subscribe to user list updates
     this.usersSubscription = this.chatService.getUserList().subscribe((users) => {
       this.userList = users;
     });

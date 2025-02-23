@@ -1,0 +1,9 @@
+<button (click)="newTasl()" class="send_btn"> taaaaaaaaaaaaaaaaaask</button>
+<ul>
+  <li *ngFor="let task of taskList">
+    <p>{{ task.id}}</p>
+    <p>{{ task.title}}</p>
+    <p>{{ task.description}}</p>
+    <p>{{ task.author}}</p>
+  </li>
+</ul>
