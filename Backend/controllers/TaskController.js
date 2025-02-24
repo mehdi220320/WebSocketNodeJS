@@ -1,10 +1,17 @@
 const TaskService = require("../services/taskService");
+const { getSocket } = require("../socket/socket"); // Import the socket helper
 
 class TaskController {
     static async createTask(req, res) {
         try {
             const { title, description, assignedTo, project, status, dueDate } = req.body;
             const newTask = await TaskService.createTask({ title, description, assignedTo, project, status, dueDate });
+
+            const io = getSocket();
+            if (io) {
+                io.emit("taskCreated", newTask);
+            }
+
             res.status(201).json({ message: "Task created successfully", task: newTask });
         } catch (error) {
             console.error("Error creating task:", error);
@@ -40,6 +47,12 @@ class TaskController {
         try {
             const taskId = req.params.id;
             const updatedTask = await TaskService.updateTask(taskId, req.body);
+
+            const io = getSocket();
+            if (io) {
+                io.emit("taskUpdated", updatedTask);
+            }
+
             res.status(200).json({ message: "Task updated successfully", task: updatedTask });
         } catch (error) {
             console.error("Error updating task:", error);
@@ -51,6 +64,12 @@ class TaskController {
         try {
             const taskId = req.params.id;
             await TaskService.deleteTask(taskId);
+
+            const io = getSocket();
+            if (io) {
+                io.emit("taskDeleted", { id: taskId });
+            }
+
             res.status(200).json({ message: "Task deleted successfully" });
         } catch (error) {
             console.error("Error deleting task:", error);
