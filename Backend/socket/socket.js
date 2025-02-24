@@ -1,7 +1,7 @@
 const { Server } = require("socket.io");
 
 let users = new Map();
-let
+let tasks = new Map();
 function setupChat(server) {
     const io = new Server(server, {
         cors: {
@@ -44,3 +44,15 @@ function setupChat(server) {
 }
 
 module.exports = { setupChat };
+class Task {
+    constructor(id, title, description, author) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.author = author;
+    }
+
+    displayInfo() {
+        return `Task${this.id}:  ${this.title} by ${this.author}`;
+    }
+}
