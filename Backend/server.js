@@ -9,6 +9,7 @@ const projectRoutes = require('./routes/projectRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const app = express();
 const server = http.createServer(app);
+const ProjectController = require("./controllers/ProjectController");
 
 app.use(cors());
 app.use(express.json());
