@@ -1,68 +1,45 @@
+require("dotenv").config();
 const express = require("express");
 const http = require("http");
-const { Server } = require("socket.io");
+const mongoose = require("mongoose");
 const cors = require("cors");
-
+const { setupChat } = require("./socket/socket");
+const userRoutes = require("./routes/userRoutes");
+const projectRoutes = require('./routes/projectRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-    },
-});
 
 app.use(cors());
+app.use(express.json());
+
+mongoose
+    .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log("MongoDB  yekhdem"))
+    .catch((err) => console.error("MongoDB connection error:", err));
+
+app.get("/test", (req, res) => {
+    res.send("Test route is working!");
+});
+
+
+app.use("/users", userRoutes);
+app.use('/projects', projectRoutes);
+app.use('/tasks', taskRoutes);
+
+
+
 app.get("/", (req, res) => {
-    res.send("Socket.IO Server is running...");
-});
-
-let users = new Map();
-let tasks=new Map();
-io.on("connection", (socket) => {
-    console.log("A user connected:", socket.id);
-
-    socket.on("join", (username) => {
-        users.set(socket.id, username);
-        console.log(`${username} joined`);
-        io.emit("userList", Array.from(users.values()));
-    });
-    socket.on("sendTask", ({ id, title, description }) => {
-        const author = users.get(socket.id) || "Anonymous";
-        const task = new Task(id, title, description, author);
-        tasks.set(id, task);
-        console.log(`Task created: ${task.displayInfo()}`);
-        console.log(tasks)
-        socket.emit("taskList", Array.from(tasks.values()));
-    });
-    socket.on("sendMessage", (message) => {
-        const sender = users.get(socket.id) || "Anonymous";
-        console.log(`Message from ${sender}:`, message);
-        io.emit("receiveMessage", { sender, text: message.text });
-    });
-
-
-    socket.on("disconnect", () => {
-        console.log(`${users.get(socket.id) || "A user"} disconnected`);
-        users.delete(socket.id);
-        io.emit("userList", Array.from(users.values()));
-    });
-});
-
-server.listen(3000, () => {
-    console.log("Socket.IO server running on port 3000");
+    res.send(" Project & Task Manager API is running...");
 });
 
 
-class Task {
-    constructor(id, title, description, author) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.author = author;
-    }
+setupChat(server);
 
-    displayInfo() {
-        return `Task${this.id}:  ${this.title} by ${this.author}`;
-    }
-}
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

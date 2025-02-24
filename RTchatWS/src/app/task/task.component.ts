@@ -16,7 +16,7 @@ export class TaskComponent implements OnInit, OnDestroy  {
   userName = '';
   taskList:Task[]=[];
   task !:Task;
-  id:number=0;
+  id:number=this.taskList.length;
 
   constructor(private chatService: ChatService,private route:ActivatedRoute) {}
 
@@ -41,7 +41,7 @@ export class TaskComponent implements OnInit, OnDestroy  {
     this.usersSubscription.unsubscribe();
     this.chatService.disconnect();
   }
-  newTasl() {
+  newTask() {
     this.task = { id: this.id++, title: "suiiiiiiiiiii", description: 'tttttttttttttttttyt' ,author: this.userName};
     this.chatService.sendTask(this.task)
   }
