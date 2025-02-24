@@ -7,6 +7,7 @@ const { setupChat } = require("./socket/socket");
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require('./routes/projectRoutes');
 const taskRoutes = require('./routes/taskRoutes');
+const authRoutes = require('./routes/authRoutes');
 const app = express();
 const server = http.createServer(app);
 const ProjectController = require("./controllers/ProjectController");
@@ -30,7 +31,7 @@ app.get("/test", (req, res) => {
 app.use("/users", userRoutes);
 app.use('/projects', projectRoutes);
 app.use('/tasks', taskRoutes);
-
+app.use('/auth', authRoutes);
 
 
 app.get("/", (req, res) => {

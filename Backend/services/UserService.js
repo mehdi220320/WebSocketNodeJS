@@ -1,8 +1,12 @@
+const bcrypt = require("bcryptjs");
 const { UserModel } = require("../models/User");
 
 class UserService {
     static async createUser(userData) {
         try {
+            const salt = await bcrypt.genSalt(10);
+            userData.password = await bcrypt.hash(userData.password, salt);
+
             const user = new UserModel(userData);
             return await user.save();
         } catch (error) {
@@ -12,7 +16,7 @@ class UserService {
 
     static async getAllUsers() {
         try {
-            return await UserModel.find();
+            return await UserModel.find().select("-password");
         } catch (error) {
             throw new Error("Error fetching users");
         }
@@ -20,7 +24,7 @@ class UserService {
 
     static async getUserById(userId) {
         try {
-            return await UserModel.findById(userId);
+            return await UserModel.findById(userId).select("-password");
         } catch (error) {
             throw new Error("Error fetching user by ID");
         }
@@ -28,7 +32,13 @@ class UserService {
 
     static async updateUser(userId, userData) {
         try {
-            return await UserModel.findByIdAndUpdate(userId, userData, { new: true });
+            if (userData.password) {
+                // Hash new password if updated
+                const salt = await bcrypt.genSalt(10);
+                userData.password = await bcrypt.hash(userData.password, salt);
+            }
+
+            return await UserModel.findByIdAndUpdate(userId, userData, { new: true }).select("-password");
         } catch (error) {
             throw new Error("Error updating user");
         }
@@ -40,6 +50,9 @@ class UserService {
         } catch (error) {
             throw new Error("Error deleting user");
         }
+    }
+    static async getUserByEmail(email) {
+        return await UserModel.findOne({ email });
     }
 }
 
