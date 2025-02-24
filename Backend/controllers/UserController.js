@@ -1,14 +1,18 @@
+require("dotenv").config();
 const UserService = require("../services/userService");
 
 class UserController {
-    static async createUser(req, res) {
+    static async getUserByEmail(email) {
+        return await User.findOne({ email });
+    }
+
+    static async createUser(userData) {
         try {
-            const { name, email, password, role } = req.body;
-            const newUser = await UserService.createUser({ name, email, password, role });
-            res.status(201).json({ message: "User created successfully", user: newUser });
+            const newUser = new User(userData);
+            return await newUser.save();
         } catch (error) {
-            console.error("Error creating user:", error);
-            res.status(500).json({ message: "Internal Server Error" });
+            console.error("Error saving user:", error);
+            return null;
         }
     }
 
@@ -17,8 +21,8 @@ class UserController {
             const users = await UserService.getAllUsers();
             res.status(200).json(users);
         } catch (error) {
-            console.error("Error fetching users:", error);
-            res.status(500).json({ message: "Internal Server Error" });
+            console.error("Error fetching users:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     }
 
@@ -31,8 +35,8 @@ class UserController {
             }
             res.status(200).json(user);
         } catch (error) {
-            console.error("Error fetching user:", error);
-            res.status(500).json({ message: "Internal Server Error" });
+            console.error("Error fetching user:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     }
 
@@ -40,21 +44,27 @@ class UserController {
         try {
             const userId = req.params.id;
             const updatedUser = await UserService.updateUser(userId, req.body);
+            if (!updatedUser) {
+                return res.status(404).json({ message: "User not found" });
+            }
             res.status(200).json({ message: "User updated successfully", user: updatedUser });
         } catch (error) {
-            console.error("Error updating user:", error);
-            res.status(500).json({ message: "Internal Server Error" });
+            console.error("Error updating user:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     }
 
     static async deleteUser(req, res) {
         try {
             const userId = req.params.id;
-            await UserService.deleteUser(userId);
+            const deletedUser = await UserService.deleteUser(userId);
+            if (!deletedUser) {
+                return res.status(404).json({ message: "User not found" });
+            }
             res.status(200).json({ message: "User deleted successfully" });
         } catch (error) {
-            console.error("Error deleting user:", error);
-            res.status(500).json({ message: "Internal Server Error" });
+            console.error("Error deleting user:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     }
 }
