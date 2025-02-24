@@ -1,7 +1,7 @@
 const { Server } = require("socket.io");
 
 let users = new Map();
-
+let
 function setupChat(server) {
     const io = new Server(server, {
         cors: {
@@ -17,6 +17,14 @@ function setupChat(server) {
             users.set(socket.id, username);
             console.log(`${username} joined`);
             io.emit("userList", Array.from(users.values()));
+        });
+        socket.on("sendTask", ({ id, title, description }) => {
+            const author = users.get(socket.id) || "Anonymous";
+            const task = new Task(id, title, description, author);
+            tasks.set(id, task);
+            console.log(`Task created: ${task.displayInfo()}`);
+            console.log(tasks)
+            socket.emit("taskList", Array.from(tasks.values()));
         });
 
         socket.on("sendMessage", (message) => {
