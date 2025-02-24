@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
         tasks.set(id, task);
         console.log(`Task created: ${task.displayInfo()}`);
         console.log(tasks)
-        io.emit("taskList", task );
+        socket.emit("taskList", Array.from(tasks.values()));
     });
     socket.on("sendMessage", (message) => {
         const sender = users.get(socket.id) || "Anonymous";
