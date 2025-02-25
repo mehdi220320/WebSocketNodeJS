@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const UserService = require("../services/userService");
 const UserController = require("./userController");
-
+const { sendEmail } = require("../services/mailService");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 class AuthController {
@@ -34,7 +34,12 @@ class AuthController {
             if (!newUser) {
                 return res.status(500).json({ message: "Error creating user" });
             }
-
+            await sendEmail(
+                email,
+                "Welcome to Our App",
+                `Hello ${name}, welcome to our platform!`,
+                `<h1>Hello ${name}</h1><p>Welcome to our platform!</p>`
+            );
             return res.status(201).json({
                 message: "User registered successfully",
                 token,

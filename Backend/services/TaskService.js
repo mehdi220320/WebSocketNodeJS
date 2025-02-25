@@ -1,10 +1,13 @@
 const  TaskModel  = require('../models/Task');
-
+const { scheduleReminderEmail } = require("../services/mailService");
 class TaskService {
     static async createTask(taskData) {
         try {
             const task = new TaskModel(taskData);
-            return await task.save();
+            await task.save();
+            scheduleReminderEmail(task);
+            return task;
+
         } catch (error) {
             throw new Error('Error creating task: ' + error.message);
         }
