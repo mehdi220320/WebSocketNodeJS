@@ -19,7 +19,7 @@ export class TaskComponent implements OnInit, OnDestroy  {
   id:number=this.taskList.length;
 
   constructor(private chatService: ChatService,private route:ActivatedRoute) {}
-
+title:string="aaaaaaaaaaaa";
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.userName = params.get('name') || 'Guest';
@@ -30,9 +30,10 @@ export class TaskComponent implements OnInit, OnDestroy  {
       this.userList = users;
     });
     this.taskSubscription = this.chatService.getTask().subscribe((task)=>{
-      // console.log(task)
+      console.log(task)
+
       this.taskList.push(task)
-      console.log(this.taskList)
+      // console.log(this.taskList)
       }
     )
   }

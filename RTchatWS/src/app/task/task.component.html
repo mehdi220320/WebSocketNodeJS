@@ -1,3 +1,5 @@
+<h1>{{this.title}}</h1>
+
 <div class="container m-5 p-2 rounded mx-auto bg-light shadow">
   <!-- App title section -->
   <div class="row m-1 p-4">
@@ -53,7 +55,7 @@
     <div class="col mx-auto">
 
       <!-- Todo Item 2 -->
-      <div class="row px-3 align-items-center todo-item rounded" *ngFor="let task of taskList">
+      <div class="row px-3 align-items-center todo-item rounded" *ngFor="let task of this.taskList">
         <div class="col-auto m-1 p-0 d-flex align-items-center">
           <h2 class="m-0 p-0">{{task.id}}
             <i class="fa fa-square-o text-primary btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Mark as complete"></i>
