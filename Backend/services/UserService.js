@@ -33,7 +33,6 @@ class UserService {
     static async updateUser(userId, userData) {
         try {
             if (userData.password) {
-                // Hash new password if updated
                 const salt = await bcrypt.genSalt(10);
                 userData.password = await bcrypt.hash(userData.password, salt);
             }

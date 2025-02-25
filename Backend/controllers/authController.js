@@ -19,7 +19,7 @@ class AuthController {
                 return res.status(400).json({ message: "User already exists" });
             }
 
-            const hashedPassword = await bcrypt.hash(password, 10);
+            //const hashedPassword = await bcrypt.hash(password, 10);
 
             const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
 
@@ -27,7 +27,7 @@ class AuthController {
                 name,
                 email,
                 password,
-                role: role || "user",
+                role: role ,
                 token: token,
             });
 
