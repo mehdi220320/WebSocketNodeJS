@@ -3,22 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChatComponent } from './chat/chat.component';
 import { TaskComponent } from './task/task.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-
+import {RouterModule} from '@angular/router';
+import { LandpageComponent } from './landpage/landpage.component';
+import { ProjectsComponent } from './projects/projects.component';
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
     SignupComponent,
     LoginComponent,
+    LandpageComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,
-    ChatComponent,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot([]) // Initialize the router
   ],
   providers: [],
   bootstrap: [AppComponent]
