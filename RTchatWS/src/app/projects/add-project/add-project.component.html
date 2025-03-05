@@ -23,27 +23,26 @@
                         <label for="Creator">Creator:</label>
                         <input type="text" id="Creator" name="Creator" required>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group" style="    width: 870px;">
                         <label for="users">Team Members:</label>
                         <select id="users"
                                 (change)="addToSelectedList($event)"
                                 style="padding: 10px 15px;
-                 border-radius: 10px;
-                 transition: 0.3s ease;
-                 width: calc(107% - 30px);
-                 border: 2px solid #eae4da;">
+                               border-radius: 10px;
+                               transition: 0.3s ease;
+                               width: calc(107% - 30px);
+                               border: 2px solid #eae4da;">
                           <option *ngFor="let user of listUsers" [value]="user">{{ user }}</option>
                         </select>
 
-                        <!-- Display Selected Users -->
                         <div style="display: flex; flex-wrap: wrap; margin-top: 10px;">
-    <span *ngFor="let user of selectedList"
-          style="margin: 5px; padding: 5px 10px; background-color: #ddd; border-radius: 5px;">
-      {{ user }}
-    </span>
+                          <span *ngFor="let user of selectedList" (click)="deleteFromSelectedList(user)" class="span_user">
+                            <span class="delete" >X</span>
+                            {{ user }}
+                          </span>
                         </div>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group" >
                         <label for="Description">Description:</label>
                         <textarea id="Description" name="Description" rows="5" required></textarea>
                       </div>

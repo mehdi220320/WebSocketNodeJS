@@ -16,5 +16,8 @@ export class AddProjectComponent {
       this.selectedList.push(selectedUser);
     }
   }
+  deleteFromSelectedList(user:string){
+    this.selectedList = this.selectedList.filter(u => u !== user);
+  }
 
 }

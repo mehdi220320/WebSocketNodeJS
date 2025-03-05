@@ -11,7 +11,7 @@ h1 {
   text-align: center;
 }
 .contact-form {
-  max-width: 500px;
+  max-width: 900px;
   margin: 0 auto;
 }
 .form-group {
@@ -130,3 +130,19 @@ h1 {
     line-height: 88px;
   }
 }
+.span_user{
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.span_user:hover{
+  background-color: #ddd;
+  color: red;
+
+}
+.delete{
+  color: white;
+}
+
