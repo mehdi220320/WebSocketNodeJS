@@ -10,9 +10,12 @@ import {RouterModule} from '@angular/router';
 import { LandpageComponent } from './landpage/landpage.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+
 import {FormsModule} from "@angular/forms";
 import {AuthServiceService} from './services/auth-service.service';
 import {HttpClientModule} from '@angular/common/http';
+import { AddProjectComponent } from './projects/add-project/add-project.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
     LandpageComponent,
     ProjectsComponent,
     SidebarComponent,
+    AddProjectComponent,
   ],
     imports: [
         BrowserModule,

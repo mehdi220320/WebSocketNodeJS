@@ -7,15 +7,16 @@ import {LoginComponent} from './login/login.component';
 import {LandpageComponent} from './landpage/landpage.component';
 import {ProjectsComponent} from './projects/projects.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
+import {AddProjectComponent} from './projects/add-project/add-project.component';
 
 const routes: Routes = [
-  {path:'chat/:name/:id',component:ChatComponent},
+  {path:'chat',component:ChatComponent},
   {path:'task/:name/:id',component:TaskComponent},
   {path:'signup',component:SignupComponent},
   {path:'login',component:LoginComponent},
   {path:'',component:LandpageComponent},
   {path:'projects',component:ProjectsComponent},
-  {path:'sidebar',component:SidebarComponent}
+  {path:'addProject',component:AddProjectComponent},
 ];
 
 @NgModule({
