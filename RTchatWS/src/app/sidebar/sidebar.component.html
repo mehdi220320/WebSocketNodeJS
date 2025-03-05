@@ -1,0 +1,74 @@
+<router-outlet *ngIf="WithSideBar(currentUrl)"></router-outlet>
+
+<div class="area"*ngIf="!WithSideBar(currentUrl)">
+  <router-outlet></router-outlet>
+</div>
+<nav class="main-menu" *ngIf="!WithSideBar(currentUrl)">
+  <ul>
+    <li>
+      <h1 class="text">
+        <span class="letter letter-1">P</span>
+        <span class="letter letter-3">R</span>
+        <span class="letter letter-2">O</span>
+        <span class="letter letter-4">j</span>
+        <span class="letter letter-4">E</span>
+        <span class="letter letter-4">C</span>
+        <span class="letter letter-4">T</span>
+        <span class="letter letter-5"> </span>
+        <span class="letter letter-4">-</span>
+        <span class="letter letter-5"> </span>
+        <span class="letter letter-4">M</span>
+        <span class="letter letter-4">A</span>
+        <span class="letter letter-4">G</span>
+      </h1>
+    </li>
+    <li>
+      <a href="https://jbfarrow.com">
+        <i class="fa fa-home fa-2x"></i>
+        <span class="nav-text">
+          Dashboard
+          </span>
+      </a>
+    </li>
+    <br>
+
+    <li class="has-subnav">
+      <a href="#">
+        <i class="fa fa-comments fa-2x"></i>
+        <span class="nav-text">
+            Group Chat
+          </span>
+      </a>
+
+    </li>
+    <br>
+    <li>
+      <a href="#">
+        <i class="fa fa-solid fa-list-ul"></i>
+        <span class="nav-text">
+            Projects List
+          </span>
+      </a>
+    </li>
+    <br>
+    <li>
+      <a href="#">
+        <i class="fa fa-solid fa-plus"></i>
+        <span class="nav-text">
+            Add Projects
+          </span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="logout">
+    <li>
+      <a href="#">
+        <i class="fa fa-power-off fa-2x"></i>
+        <span class="nav-text">
+            Logout
+          </span>
+      </a>
+    </li>
+  </ul>
+</nav>
