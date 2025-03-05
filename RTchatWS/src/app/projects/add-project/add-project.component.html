@@ -1,0 +1,68 @@
+<div class="d-flex flex-column" id="content-wrapper">
+  <div id="content">
+    <div class="container-fluid">
+      <div class="card shadow mb-2" style="height: 105px;align-items: center;">
+        <h3 style="padding: 27px" class="text-dark mb-4">Create Project</h3>
+      </div>
+      <div class="card shadow" style="height: fit-content">
+        <div class="card-header py-3">
+          <p class="text m-0 fw-bold">Create Project</p>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="col-12 px-0 mb-4">
+              <div class="container-box">
+                <section style="width: 100%" >
+                  <div class="contact-form">
+                    <form autocomplete="off" method="post">
+                      <div class="form-group">
+                        <label for="Title">Title:</label>
+                        <input type="text" id="Title" name="Title" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="Creator">Creator:</label>
+                        <input type="text" id="Creator" name="Creator" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="users">Team Members:</label>
+                        <select id="users"
+                                (change)="addToSelectedList($event)"
+                                style="padding: 10px 15px;
+                 border-radius: 10px;
+                 transition: 0.3s ease;
+                 width: calc(107% - 30px);
+                 border: 2px solid #eae4da;">
+                          <option *ngFor="let user of listUsers" [value]="user">{{ user }}</option>
+                        </select>
+
+                        <!-- Display Selected Users -->
+                        <div style="display: flex; flex-wrap: wrap; margin-top: 10px;">
+    <span *ngFor="let user of selectedList"
+          style="margin: 5px; padding: 5px 10px; background-color: #ddd; border-radius: 5px;">
+      {{ user }}
+    </span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="Description">Description:</label>
+                        <textarea id="Description" name="Description" rows="5" required></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary" style="text-align:center;
+                                                                            width:250px;
+                                                                            margin-left: 230px;
+                                                                            margin-top:15px;" >Create</button>
+                    </form>
+                  </div>
+
+                </section>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

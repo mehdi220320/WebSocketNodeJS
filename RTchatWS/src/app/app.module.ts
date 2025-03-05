@@ -10,6 +10,7 @@ import {RouterModule} from '@angular/router';
 import { LandpageComponent } from './landpage/landpage.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AddProjectComponent } from './projects/add-project/add-project.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     LandpageComponent,
     ProjectsComponent,
     SidebarComponent,
+    AddProjectComponent,
   ],
   imports: [
     BrowserModule,
