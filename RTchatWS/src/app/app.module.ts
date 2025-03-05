@@ -10,6 +10,9 @@ import {RouterModule} from '@angular/router';
 import { LandpageComponent } from './landpage/landpage.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import {FormsModule} from "@angular/forms";
+import {AuthServiceService} from './services/auth-service.service';
+import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,11 +23,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ProjectsComponent,
     SidebarComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot([]) // Initialize the router
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        RouterModule.forRoot([]),
+        FormsModule,
+
+        // Initialize the router
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
