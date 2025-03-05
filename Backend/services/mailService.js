@@ -59,7 +59,7 @@ END:VCALENDAR
             const user = await UserService.getUserById(task.assignedTo);
             if (!user || !user.email || !task.dueDate) return;
 
-            console.log(`📅 Sending task email with calendar invite to ${user.email}...`);
+            console.log(` Sending task email with calendar invite to ${user.email}...`);
 
             const icsContent = createCalendarEvent(task);
 
@@ -82,9 +82,9 @@ END:VCALENDAR
             };
 
             const info = await transporter.sendMail(mailOptions);
-            console.log("✅ Email with calendar invite sent: ", info.response);
+            console.log(" Email with calendar invite sent: ", info.response);
         } catch (error) {
-            console.error("❌ Error sending task email:", error);
+            console.error(" Error sending task email:", error);
         }
     }
 
