@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import {RouterModule} from '@angular/router';
 import { LandpageComponent } from './landpage/landpage.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +18,7 @@ import { ProjectsComponent } from './projects/projects.component';
     LoginComponent,
     LandpageComponent,
     ProjectsComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
