@@ -10,13 +10,15 @@ import {Observable} from 'rxjs';
 })
 export class SidebarComponent implements OnInit{
   currentUrl: string = '';
-  UrlsWithSideBar:string []=['','login','signup'];
+  UrlsWithSideBar:string []=['/','/login','/signup'];
   constructor(private route:Router) {
   }
   ngOnInit(){
     this.route.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
+        console.log("the current url is : "+this.currentUrl)
+
       }
     });
   }
