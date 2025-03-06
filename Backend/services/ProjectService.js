@@ -1,5 +1,5 @@
 const ProjectModel = require('../models/Project');
-
+const TaskModel = require("../models/Task");
 class ProjectService {
     static async createProject(projectData) {
         try {
@@ -33,8 +33,30 @@ class ProjectService {
             throw new Error('Error updating project: ' + error.message);
         }
     }
+    static async getProjectsByUser(userId) {
+        try {
+            const userTaskProjects = await TaskModel.find({ assignedTo: userId }).distinct("project");
 
-    static async deleteProject(projectId) {
+            if (!userTaskProjects.length) {
+                return [];
+            }
+
+            const projects = await ProjectModel.find({ _id: { $in: userTaskProjects } })
+                .populate("createdBy", "name email")
+                .populate({
+                    path: "tasks",
+                    populate: { path: "assignedTo", select: "name email" }
+                });
+
+            return projects;
+        } catch (error) {
+            throw new Error("Error fetching user projects: " + error.message);
+        }
+    }
+
+
+
+static async deleteProject(projectId) {
         try {
             return await ProjectModel.findByIdAndDelete(projectId);
         } catch (error) {

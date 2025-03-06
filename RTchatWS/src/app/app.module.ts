@@ -13,7 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 import {FormsModule} from "@angular/forms";
 import {AuthServiceService} from './services/auth-service.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import { AddProjectComponent } from './projects/add-project/add-project.component';
 
 @NgModule({
@@ -32,10 +32,8 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
         AppRoutingModule,
         RouterModule.forRoot([]),
         FormsModule,
-
-        // Initialize the router
     ],
-  providers: [],
+  providers: [    provideHttpClient(withInterceptorsFromDi()) ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

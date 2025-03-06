@@ -40,46 +40,46 @@
         <div class="formbg">
           <div class="formbg-inner padding-horizontal--48">
             <span class="padding-bottom--15">Signup your account</span>
-            <form id="stripe-login ">
+            <form  (ngSubmit)="onRegister()" id="stripe-login ">
               <div style="display: flex">
                 <div >
                   <div class="field padding-bottom--24">
                     <div class="grid--50-50">
                       <label for="First_Name">First Name</label>
                     </div>
-                    <input type="text" id="First_Name" name="First_Name">
+                    <input type="text" id="First_Name" [(ngModel)]="firstName" name="firstName" required>
                   </div>
                   <div class="field padding-bottom--24">
                     <div class="grid--50-50">
                       <label for="Last_Name">Last Name</label>
                     </div>
-                    <input type="text" name="Last_Name" id="Last_Name">
-                  </div>
+                    <input type="text" id="Last_Name" [(ngModel)]="lastName" name="lastName" required>                  </div>
                   <div class="field padding-bottom--24">
                     <div class="grid--50-50">
                       <label for="Role">Role</label>
                     </div>
-                    <input type="text" id="Role" name="Role">
-                  </div>
+                    <select id="role" name="role" [(ngModel)]="role" required>
+                      <option value="" disabled selected>Select a role</option> <!-- Placeholder option -->
+                      <option value="Admin">Admin</option>
+                      <option value="Team Leader">Team Leader</option>
+                      <option value="Dev">Dev</option>
+                    </select>                  </div>
                 </div>
                 <div class="vl"></div>
                 <div>
                   <div class="field padding-bottom--24">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
-                  </div>
+                    <input type="email" id="email" [(ngModel)]="email" name="email" required>                  </div>
                   <div class="field padding-bottom--24">
                     <div class="grid--50-50">
                       <label for="password">Password</label>
                     </div>
-                    <input type="password" id="password" name="password">
-                  </div>
+                    <input type="password" id="password" [(ngModel)]="password" name="password" required>                  </div>
                   <div class="field padding-bottom--24">
                     <div class="grid--50-50">
                       <label for="confpassword" style="    width: 500px;">Confirm Password</label>
                     </div>
-                    <input type="password" id="confpassword" name="confpassword">
-                  </div>
+                    <input type="password" id="confpassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>                  </div>
                 </div>
               </div>
               <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
@@ -88,8 +88,7 @@
                 </label>
               </div>
               <div class="field padding-bottom--24">
-                <input type="submit" name="submit" style="background: #5469d4;     width: 100%;" value="Continue">
-              </div>
+                <button type="submit" style="background: #5469d4; width: 100%;">Continue</button>              </div>
 
             </form>
           </div>

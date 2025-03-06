@@ -18,7 +18,17 @@ class ProjectController {
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
+    static async getProjectsByUser(req, res) {
+        try {
+            const userId = req.params.userId; // Get user ID from request
+            const projects = await ProjectService.getProjectsByUser(userId);
 
+            res.status(200).json(projects);
+        } catch (error) {
+            console.error("Error fetching projects:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
     static async getAllProjects(req, res) {
         try {
             const projects = await ProjectService.getAllProjects();
