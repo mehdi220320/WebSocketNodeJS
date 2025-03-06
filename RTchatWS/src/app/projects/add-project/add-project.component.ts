@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
+import {ProjectService} from '../../services/project.service';
 
 @Component({
   selector: 'app-add-project',
@@ -6,18 +8,68 @@ import { Component } from '@angular/core';
   templateUrl: './add-project.component.html',
   styleUrl: './add-project.component.css'
 })
-export class AddProjectComponent {
-  listUsers: string[] = ["3amer", "salem", "3li", "salah", "mohamed", "khdija", "jilani"];
+export class AddProjectComponent implements OnInit {
+  listUsers: any[] = [];
   selectedList: string[] = [];
+  projectDetails: any = {};
+  loggedInUserId: string = '';
 
-  addToSelectedList(event: Event) {
+  constructor(
+    private userService: UserService,
+    private projectService: ProjectService
+  ) {}
+
+  ngOnInit(): void {
+    this.fetchUsers();
+    this.getLoggedInUserId();
+  }
+
+  fetchUsers(): void {
+    this.userService.getAllUsers().subscribe(
+      (users: any[]) => {
+        this.listUsers = users;
+        console.log('Users fetched:', users);
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
+
+  getLoggedInUserId(): void {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.loggedInUserId = userId;
+    }
+  }
+
+  addToSelectedList(event: Event): void {
     const selectedUser = (event.target as HTMLSelectElement).value;
     if (selectedUser && !this.selectedList.includes(selectedUser)) {
       this.selectedList.push(selectedUser);
     }
   }
-  deleteFromSelectedList(user:string){
-    this.selectedList = this.selectedList.filter(u => u !== user);
+
+  deleteFromSelectedList(user: string): void {
+    this.selectedList = this.selectedList.filter((u) => u !== user);
   }
 
+  createProject(): void {
+    const newProject = {
+      name: this.projectDetails.name,
+      description: this.projectDetails.description,
+      status: this.projectDetails.status,
+      users: this.selectedList,
+      createdBy: this.loggedInUserId,
+    };
+
+    this.projectService.createProject(newProject).subscribe(
+      (project) => {
+        console.log('Project created:', project);
+      },
+      (error) => {
+        console.error('Error creating project:', error);
+      }
+    );
+  }
 }

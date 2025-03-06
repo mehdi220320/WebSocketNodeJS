@@ -20,7 +20,7 @@ class ProjectController {
     }
     static async getProjectsByUser(req, res) {
         try {
-            const userId = req.params.userId; // Get user ID from request
+            const userId = req.params.userId;
             const projects = await ProjectService.getProjectsByUser(userId);
 
             res.status(200).json(projects);
@@ -32,6 +32,10 @@ class ProjectController {
     static async getAllProjects(req, res) {
         try {
             const projects = await ProjectService.getAllProjects();
+            const io = getSocket();
+            if (io) {
+                io.emit("projectsFetched", projects);
+            }
             res.status(200).json(projects);
         } catch (error) {
             console.error("Error fetching projects:", error);
@@ -60,7 +64,7 @@ class ProjectController {
 
             const io = getSocket();
             if (io) {
-                io.emit("projectUpdated", updatedProject); // Notify all clients
+                io.emit("projectUpdated", updatedProject);
             }
 
             res.status(200).json({ message: "Project updated successfully", project: updatedProject });

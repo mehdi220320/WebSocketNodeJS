@@ -12,55 +12,59 @@
           <div class="container">
             <div class="col-12 px-0 mb-4">
               <div class="container-box">
-                <section style="width: 100%" >
+                <section style="width: 100%">
                   <div class="contact-form">
-                    <form autocomplete="off" method="post">
+                    <form autocomplete="off" (ngSubmit)="createProject()">
+                      <!-- Project Title -->
                       <div class="form-group">
                         <label for="Title">Title:</label>
-                        <input type="text" id="Title" name="Title" required>
+                        <input type="text" id="Title" name="Title" [(ngModel)]="projectDetails.name" required />
                       </div>
-                      <div class="form-group">
-                        <label for="Creator">Creator:</label>
-                        <input type="text" id="Creator" name="Creator" required>
-                      </div>
-                      <div class="form-group" style="    width: 870px;">
+
+
+
+                      <!-- Select Team Members -->
+                      <div class="form-group" style="width: 870px;">
                         <label for="users">Team Members:</label>
-                        <select id="users"
-                                (change)="addToSelectedList($event)"
-                                style="padding: 10px 15px;
-                               border-radius: 10px;
-                               transition: 0.3s ease;
-                               width: calc(107% - 30px);
-                               border: 2px solid #eae4da;">
-                          <option *ngFor="let user of listUsers" [value]="user">{{ user }}</option>
+                        <select
+                          id="users"
+                          (change)="addToSelectedList($event)"
+                          style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;">
+                          <option *ngFor="let user of listUsers" [value]="user._id">{{ user.name }}</option>
                         </select>
 
+                        <!-- Display selected users -->
                         <div style="display: flex; flex-wrap: wrap; margin-top: 10px;">
-                          <span *ngFor="let user of selectedList" (click)="deleteFromSelectedList(user)" class="span_user">
-                            <span class="delete" >X</span>
+                          <span
+                            *ngFor="let user of selectedList"
+                            (click)="deleteFromSelectedList(user)"
+                            class="span_user">
+                            <span class="delete">X</span>
                             {{ user }}
                           </span>
                         </div>
                       </div>
-                      <div class="form-group" >
+
+                      <!-- Project Description -->
+                      <div class="form-group">
                         <label for="Description">Description:</label>
-                        <textarea id="Description" name="Description" rows="5" required></textarea>
+                        <textarea id="Description" name="Description" rows="5" [(ngModel)]="projectDetails.description" required></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary" style="text-align:center;
-                                                                            width:250px;
-                                                                            margin-left: 230px;
-                                                                            margin-top:15px;" >Create</button>
+
+                      <!-- Submit Button -->
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="text-align:center; width:250px; margin-left: 230px; margin-top:15px;">
+                        Create
+                      </button>
                     </form>
                   </div>
-
                 </section>
-
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>

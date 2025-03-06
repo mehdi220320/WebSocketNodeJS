@@ -1,0 +1,26 @@
+<div class="update-project">
+  <h2>Update Project</h2>
+
+  <form (ngSubmit)="updateProject()">
+    <div>
+      <label for="name">Project Name:</label>
+      <input id="name" [(ngModel)]="projectToUpdate.name" name="name" required />
+    </div>
+
+    <div>
+      <label for="description">Project Description:</label>
+      <input id="description" [(ngModel)]="projectToUpdate.description" name="description" />
+    </div>
+
+    <div>
+      <label for="status">Project Status:</label>
+      <select id="status" [(ngModel)]="projectToUpdate.status" name="status">
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+    </div>
+
+    <button type="submit">Update Project</button>
+  </form>
+</div>

@@ -12,7 +12,16 @@ export class ChatService {
   constructor() {
     this.socket = io(this.serverUrl);
   }
+  sendProject(project: any): void {
+    this.socket.emit('sendProject', project); // Emit a project-related event
+  }
 
+  getProjectUpdates(): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on('projectCreated', (project) => observer.next(project)); // Listen for project creation
+      this.socket.on('projectUpdated', (project) => observer.next(project)); // Listen for project updates
+    });
+  }
   joinChat(username: string): void {
     this.socket.emit('join', username);
   }

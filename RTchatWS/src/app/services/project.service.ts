@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
-@Injectable({
+import { io, Socket } from 'socket.io-client';
+import { ChatService } from './chat.service';
+ @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
   private apiUrl = 'http://localhost:3000/projects';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient ,         private chatService: ChatService  ) {}
 
   createProject(project: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/`, project, this.getHttpOptions());
@@ -28,8 +29,15 @@ export class ProjectService {
   deleteProject(projectId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${projectId}`, this.getHttpOptions());
   }
+   listenForProjectUpdates(): Observable<any> {
+     return this.chatService.getProjectUpdates();
+   }
 
-  private getHttpOptions() {
+   emitNewProject(project: any) {
+     this.chatService.sendProject(project);
+   }
+
+   private getHttpOptions() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('token')
