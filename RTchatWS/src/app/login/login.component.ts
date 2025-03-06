@@ -27,7 +27,8 @@ export class LoginComponent {
       next: (response) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('userId', response.user.id);
-        this.router.navigate(['/admin']);
+        localStorage.setItem('userRole', response.user.role);
+        this.router.navigate(['/projects']);
       },
       error: (error) => {
         this.errorMessage = error.error.message || 'Login failed';

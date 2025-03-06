@@ -50,7 +50,7 @@ export class ProjectsComponent implements OnInit {
     if (confirm('Are you sure you want to delete this project?')) {
       this.projectService.deleteProject(projectId).subscribe(
         () => {
-          this.projects = this.projects.filter(project => project._id !== projectId); // Remove the deleted project from the list
+          this.projects = this.projects.filter(project => project._id !== projectId);
           console.log('Project deleted successfully');
         },
         (error) => {

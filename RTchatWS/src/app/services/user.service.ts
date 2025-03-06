@@ -11,6 +11,8 @@ export class UserService {
 
 
   getAllUsers(): Observable<string[]> {
+
+
     return this.http.get<string[]>(this.apiUrl, this.getHttpOptions());
   }
 
@@ -25,4 +27,6 @@ export class UserService {
     });
     return { headers };
   }
+
+
 }

@@ -1,9 +1,10 @@
 const express = require('express');
 const ProjectController = require('../controllers/projectController');
+const authvalidator = require("../controllers/authvalidation");
 
 const router = express.Router();
 
-router.post('/', ProjectController.createProject);
+router.post('/',authvalidator, ProjectController.createProject);
 router.get('/', ProjectController.getAllProjects);
 router.get('/:id', ProjectController.getProjectById);
 router.put('/:id', ProjectController.updateProject);
