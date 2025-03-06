@@ -70,7 +70,9 @@ class AuthController {
             console.log("User found:", user);
 
             if (!user) return res.status(401).json({ message: "Invalid credentials" });
-
+            if (!user.isActivated) {
+                return res.status(403).json({ message: "Account is not activated" });
+            }
             console.log("Stored Hash:", user.password);
             console.log("Entered Password:", password);
 
