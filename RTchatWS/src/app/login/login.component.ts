@@ -26,6 +26,7 @@ export class LoginComponent {
     this.authService.loginn(this.email, this.password).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('userId', response.user.id);
         this.router.navigate(['/admin']);
       },
       error: (error) => {

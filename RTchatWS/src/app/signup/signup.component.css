@@ -128,7 +128,7 @@ label {
   align-items: center;
 }
 
-.field input {
+.field input, select {
   width: 227px;
   font-size: 16px;
   line-height: 28px;

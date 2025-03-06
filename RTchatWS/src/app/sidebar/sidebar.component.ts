@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 })
 export class SidebarComponent implements OnInit{
   currentUrl: string = '';
-  UrlsWithSideBar:string []=['/',];
+  UrlsWithSideBar:string []=['/','/login','/signup'];
   constructor(private route:Router) {
   }
   ngOnInit(){
