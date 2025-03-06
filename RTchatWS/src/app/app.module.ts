@@ -15,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 import {AuthServiceService} from './services/auth-service.service';
 import {HttpClientModule, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import { AddProjectComponent } from './projects/add-project/add-project.component';
+import { UpdateProjectComponent } from './projects/update-project/update-project.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +27,16 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
     ProjectsComponent,
     SidebarComponent,
     AddProjectComponent,
+    UpdateProjectComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         RouterModule.forRoot([]),
         FormsModule,
+
     ],
-  providers: [    provideHttpClient(withInterceptorsFromDi()) ],
+  providers: [    provideHttpClient() ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

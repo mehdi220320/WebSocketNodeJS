@@ -1,7 +1,7 @@
 <div class="d-flex flex-column" id="content-wrapper">
   <div id="content">
     <div class="container-fluid">
-      <div class="card shadow mb-2" style="height: 105px;align-items: center;">
+      <div class="card shadow mb-2" style="height: 105px; align-items: center;">
         <h3 style="padding: 27px" class="text-dark mb-4">Projects</h3>
       </div>
       <div class="card shadow">
@@ -15,8 +15,8 @@
               <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
                 <label class="form-label">
                   Show&nbsp;
-                  <select class="d-inline-block form-select form-select-sm">
-                    <option value="10" selected="">10</option>
+                  <select class="d-inline-block form-select form-select-sm" [(ngModel)]="recordsPerPage" (change)="onRecordsPerPageChange(recordsPerPage)">
+                    <option value="10" selected>10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
@@ -34,32 +34,34 @@
           </div>
 
           <!-- Table Content -->
-          <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-            <div th:if="${blackList == null || #lists.isEmpty(blackList)}">
-              <h2>No record found!</h2>
+          <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
+            <div *ngIf="projects.length === 0">
+              <h2>No projects found!</h2>
             </div>
-            <div th:if="${blackList != null && !#lists.isEmpty(blackList)}">
+            <div *ngIf="projects.length > 0">
               <table class="table my-0" id="dataTable" style="background: transparent">
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Word</th>
-                  <th>Delete</th>
+                  <th>Title</th>
+                  <th>Status</th>
                   <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="blackword : ${blackList}">
-                  <td th:text="${blackword.id}"></td>
-                  <td th:text="${blackword.word}"></td>
+                <tr *ngFor="let project of projects">
+                  <td>{{ project._id }}</td>
+                  <td>{{ project.name }}</td>
+                  <td>{{ project.status }}</td>
                   <td>
-                    <a th:href="@{/api/v1/blacklist/delete/{id}(id=${blackword.id})}" class="btn btn-danger">
-                      <i class="fas fa-trash"></i> Delete
+                    <a class="btn btn-primary" [routerLink]="['/projects/update/', project._id]" >
+                      <i class="fas fa-edit"></i> Edit
                     </a>
                   </td>
                   <td>
-                    <a th:href="@{/api/v1/blacklist/edit/{id}(id=${blackword.id})}" class="btn btn-primary">
-                      <i class="fas fa-edit"></i> Edit
+                    <a class="btn btn-danger"  (click)="deleteProject(project._id)">
+                      <i class="fas fa-trash"></i> Delete
                     </a>
                   </td>
                 </tr>
@@ -67,9 +69,10 @@
                 <tfoot>
                 <tr>
                   <td><strong>Id</strong></td>
-                  <td><strong>Word</strong></td>
-                  <td><strong>Delete</strong></td>
+                  <td><strong>Title</strong></td>
+                  <td><strong>Status</strong></td>
                   <td><strong>Edit</strong></td>
+                  <td><strong>Delete</strong></td>
                 </tr>
                 </tfoot>
               </table>
@@ -80,27 +83,31 @@
           <div class="row">
             <div class="col-md-6 align-self-center">
               <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-                Showing 1 to 10 of 27
+                Showing {{(currentPage - 1) * recordsPerPage + 1}} to
+                {{ Math.min(currentPage * recordsPerPage, totalRecords) }} of {{ totalRecords }}
               </p>
             </div>
             <div class="col-md-6">
               <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                 <ul class="pagination">
-                  <li class="page-item disabled">
-                    <a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a>
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" aria-label="Previous" href="#" (click)="onPageChange(currentPage - 1)">
+                      <span aria-hidden="true">«</span>
+                    </a>
                   </li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a>
+                  <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [class.active]="currentPage === i + 1">
+                    <a class="page-link" href="javascript:void(0)" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" aria-label="Next" href="javascript:void(0)" (click)="onPageChange(currentPage + 1)">
+                      <span aria-hidden="true">»</span>
+                    </a>
                   </li>
                 </ul>
               </nav>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

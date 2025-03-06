@@ -8,6 +8,7 @@ import {LandpageComponent} from './landpage/landpage.component';
 import {ProjectsComponent} from './projects/projects.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {AddProjectComponent} from './projects/add-project/add-project.component';
+import {UpdateProjectComponent} from './projects/update-project/update-project.component';
 
 const routes: Routes = [
   {path:'chat',component:ChatComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'',component:LandpageComponent},
   {path:'projects',component:ProjectsComponent},
   {path:'addProject',component:AddProjectComponent},
+  { path: 'projects/update/:id', component: UpdateProjectComponent },
 ];
 
 @NgModule({
