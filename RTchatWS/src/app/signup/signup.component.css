@@ -1,3 +1,52 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--light);
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+
+}
+
+.nav-links a {
+  margin-right: 30px;
+  text-decoration: none;
+  color: var(--dark);
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a.active {
+  background-color: var(--primary);
+  border-radius: 30px 20px 12px 20px;
+}
+
+.contact-btn {
+  display: block;
+  background: var(--dark);
+  color: var(--light);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px 20px 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #333;
+}
 .vl {
   border-left: 4px solid #e3e8ee;
   height: 300px;

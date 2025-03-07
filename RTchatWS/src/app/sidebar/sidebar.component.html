@@ -1,74 +1,275 @@
+
 <router-outlet *ngIf="WithSideBar(currentUrl)"></router-outlet>
 
-<div class="area"*ngIf="!WithSideBar(currentUrl)">
-  <router-outlet></router-outlet>
+
+<div *ngIf="!WithSideBar(currentUrl)"  style="display:flex;height: 100%;width:100%" class="layout  has-sidebar fixed-sidebar fixed-header">
+  <aside id="sidebar" class="sidebar break-point-sm has-bg-image" >
+    <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+    <div class="image-wrapper">
+      <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+    </div>
+    <div class="sidebar-layout">
+      <div class="sidebar-header">
+        <div class="pro-sidebar-logo">
+          <div>P</div>
+          <h5>Project Management</h5>
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <nav class="menu open-current-submenu">
+          <ul>
+            <li class="menu-header"><span> GENERAL </span></li>
+            <li class="menu-item sub-menu">
+              <a href="#">
+                    <span class="menu-icon">
+                      <i class="fa fa-solid fa-chart-pie"></i>
+                    </span>
+                <span class="menu-title">Dashboard</span>
+                <span class="menu-suffix">
+                      <span class="badge primary">Admin</span>
+                    </span>
+              </a>
+              <div class="sub-menu-list">
+                <ul>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Grid</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Layout</span>
+                    </a>
+                  </li>
+                  <li class="menu-item sub-menu">
+                    <a href="#">
+                      <span class="menu-title">Forms</span>
+                    </a>
+                    <div class="sub-menu-list">
+                      <ul>
+                        <li class="menu-item">
+                          <a href="#">
+                            <span class="menu-title">Input</span>
+                          </a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="#">
+                            <span class="menu-title">Select</span>
+                          </a>
+                        </li>
+                        <li class="menu-item sub-menu">
+                          <a href="#">
+                            <span class="menu-title">More</span>
+                          </a>
+                          <div class="sub-menu-list">
+                            <ul>
+                              <li class="menu-item">
+                                <a href="#">
+                                  <span class="menu-title">CheckBox</span>
+                                </a>
+                              </li>
+                              <li class="menu-item">
+                                <a href="#">
+                                  <span class="menu-title">Radio</span>
+                                </a>
+                              </li>
+                              <li class="menu-item sub-menu">
+                                <a href="#">
+                                  <span class="menu-title">Want more ?</span>
+                                  <span class="menu-suffix">&#x1F914;</span>
+                                </a>
+                                <div class="sub-menu-list">
+                                  <ul>
+                                    <li class="menu-item">
+                                      <a href="#">
+                                        <span class="menu-prefix">&#127881;</span>
+                                        <span class="menu-title">You made it </span>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="menu-item sub-menu">
+              <a routerLink="/chat">
+                    <span class="menu-icon">
+                      <i class="fa fa-comments "></i>
+                    </span>
+                <span class="menu-title">Chats</span>
+              </a>
+              <div class="sub-menu-list">
+                <ul>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Pie chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Line chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Bar chart</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="menu-item sub-menu">
+              <a routerLink="/projects">
+                    <span class="menu-icon">
+                 <i class="fa fa-solid fa-list-ul"></i>
+                    </span>
+                <span class="menu-title">Projects list</span>
+              </a>
+              <div class="sub-menu-list">
+                <ul>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Pie chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Line chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Bar chart</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="menu-item sub-menu">
+              <a routerLink="/addProject">
+                    <span class="menu-icon">
+                 <i class="fa fa-solid fa-plus"></i>
+                    </span>
+                <span class="menu-title">AddProject</span>
+              </a>
+              <div class="sub-menu-list">
+                <ul>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Pie chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Line chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Bar chart</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+
+
+            <li class="menu-header" style="padding-top: 20px"><span> Profile </span></li>
+            <li class="menu-item">
+              <a href="#">
+                    <span class="menu-icon">
+                          <i class="fa fa-solid fa-user"></i>
+                    </span>
+                <span class="menu-title">Edit Profile</span>
+
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#">
+                    <span class="menu-icon">
+                          <i class="fa fa-solid fa-door-closed"></i>
+                    </span>
+                <span class="menu-title">Logout</span>
+                <span class="menu-suffix">
+                      <span class="badge secondary">>></span>
+                    </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="sidebar-footer">
+<!--        <div class="footer-box">-->
+<!--          <div>-->
+<!--            <img-->
+<!--              class="react-logo"-->
+<!--              src="https://user-images.githubusercontent.com/25878302/213938106-ca8f0485-3f30-4861-9188-2920ed7ab284.png"-->
+<!--              alt="react"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <div style="padding: 0 10px">-->
+<!--                <span style="display: block; margin-bottom: 10px"-->
+<!--                >Pro sidebar is also available as a react package-->
+<!--                </span>-->
+<!--            <div style="margin-bottom: 15px">-->
+<!--              <img-->
+<!--                alt="preview badge"-->
+<!--                src="https://img.shields.io/github/stars/azouaoui-med/react-pro-sidebar?style=social"-->
+<!--              />-->
+<!--            </div>-->
+<!--            <div>-->
+<!--              <a href="https://github.com/azouaoui-med/react-pro-sidebar" target="_blank"-->
+<!--              >Check it out!</a-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </aside>
+  <div id="overlay" class="overlay"></div>
+  <div class="layout">
+    <main class="content" *ngIf="!WithSideBar(currentUrl)">
+     <router-outlet></router-outlet>
+    </main>
+    <div class="overlay"></div>
+  </div>
 </div>
-<nav class="main-menu" *ngIf="!WithSideBar(currentUrl)">
-  <ul>
-    <li>
-      <h1 class="text">
-        <span class="letter letter-1">P</span>
-        <span class="letter letter-3">R</span>
-        <span class="letter letter-2">O</span>
-        <span class="letter letter-4">j</span>
-        <span class="letter letter-4">E</span>
-        <span class="letter letter-4">C</span>
-        <span class="letter letter-4">T</span>
-        <span class="letter letter-5"> </span>
-        <span class="letter letter-4">-</span>
-        <span class="letter letter-5"> </span>
-        <span class="letter letter-4">M</span>
-        <span class="letter letter-4">A</span>
-        <span class="letter letter-4">G</span>
-      </h1>
-    </li>
-    <li>
-      <a href="https://jbfarrow.com">
-        <i class="fa fa-home fa-2x"></i>
-        <span class="nav-text">
-          Dashboard
-          </span>
-      </a>
-    </li>
-    <br>
 
-    <li class="has-subnav">
-      <a routerLink="chat/">
-        <i class="fa fa-comments fa-2x"></i>
-        <span class="nav-text">
-            Group Chat
-          </span>
-      </a>
 
-    </li>
-    <br>
-    <li>
-      <a routerLink="projects">
-        <i class="fa fa-solid fa-list-ul"></i>
-        <span class="nav-text">
-            Projects List
-          </span>
-      </a>
-    </li>
-    <br>
-    <li>
-      <a href="">
-        <i class="fa fa-solid fa-plus"></i>
-        <span class="nav-text">
-            Add Projects
-          </span>
-      </a>
-    </li>
-  </ul>
 
-  <ul class="logout">
-    <li>
-      <a href="#">
-        <i class="fa fa-power-off fa-2x"></i>
-        <span class="nav-text">
-            Logout
-          </span>
-      </a>
-    </li>
-  </ul>
-</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
