@@ -25,6 +25,13 @@ export class ProjectService {
   updateProject(projectId: string, updatedProject: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${projectId}`, updatedProject, this.getHttpOptions());
   }
+   getProjectsByTeamLeader(teamLeaderId: string): Observable<any[]> {
+     return this.http.get<any[]>(`${this.apiUrl}/teamleader/${teamLeaderId}`, this.getHttpOptions());
+   }
+
+   getProjectsByUser(userId: string): Observable<any[]> {
+     return this.http.get<any[]>(`${this.apiUrl}/user/${userId}`, this.getHttpOptions());
+   }
 
   deleteProject(projectId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${projectId}`, this.getHttpOptions());
@@ -32,7 +39,9 @@ export class ProjectService {
    listenForProjectUpdates(): Observable<any> {
      return this.chatService.getProjectUpdates();
    }
-
+   listenForTaskAssignments() {
+     return this.chatService.getTaskUpdates();
+   }
    emitNewProject(project: any) {
      this.chatService.sendProject(project);
    }

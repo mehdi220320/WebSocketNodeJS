@@ -10,7 +10,7 @@ import {ProjectService} from '../../services/project.service';
 })
 export class AddProjectComponent implements OnInit {
   listUsers: any[] = [];
-  selectedList: string[] = [];
+  selectedList: any[] = [];
   projectDetails: any = {};
   loggedInUserId: string = '';
 
@@ -27,8 +27,8 @@ export class AddProjectComponent implements OnInit {
   fetchUsers(): void {
     this.userService.getAllUsers().subscribe(
       (users: any[]) => {
-        this.listUsers = users;
-        console.log('Users fetched:', users);
+        this.listUsers = users.filter(user => user.role === 'TeamLeader');
+        console.log('Filtered Team Leaders:', this.listUsers);
       },
       (error) => {
         console.error('Error fetching users:', error);
@@ -45,8 +45,9 @@ export class AddProjectComponent implements OnInit {
 
   addToSelectedList(event: Event): void {
     const selectedUser = (event.target as HTMLSelectElement).value;
-    if (selectedUser && !this.selectedList.includes(selectedUser)) {
-      this.selectedList.push(selectedUser);
+
+    if (selectedUser) {
+      this.selectedList = [selectedUser];
     }
   }
 
@@ -59,7 +60,7 @@ export class AddProjectComponent implements OnInit {
       name: this.projectDetails.name,
       description: this.projectDetails.description,
       status: this.projectDetails.status,
-      users: this.selectedList,
+      teamLeader: this.selectedList[0],
       createdBy: this.loggedInUserId,
     };
 

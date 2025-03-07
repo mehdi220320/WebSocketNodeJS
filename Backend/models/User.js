@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
-        role: { type: String, enum: ["Admin", "Team Leader", "Dev"], default: "User" },
+        role: { type: String, enum: ["Admin", "TeamLeader", "Dev"], default: "User" },
         token: { type: String },
         isActivated: { type: Boolean, default: false }
     },

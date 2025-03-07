@@ -25,24 +25,17 @@
 
                       <!-- Select Team Members -->
                       <div class="form-group" style="width: 870px;">
-                        <label for="users">Team Members:</label>
+                        <label for="users">Team Leader:</label>
                         <select
                           id="users"
                           (change)="addToSelectedList($event)"
-                          style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;">
-                          <option *ngFor="let user of listUsers" [value]="user._id">{{ user.name }}</option>
+                          style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;" [disabled]="listUsers.length === 0">
+                          <option *ngFor="let user of listUsers" [value]="user._id">
+                            {{ user.name }} ({{ user.role }})
+                          </option>
                         </select>
 
-                        <!-- Display selected users -->
-                        <div style="display: flex; flex-wrap: wrap; margin-top: 10px;">
-                          <span
-                            *ngFor="let user of selectedList"
-                            (click)="deleteFromSelectedList(user)"
-                            class="span_user">
-                            <span class="delete">X</span>
-                            {{ user }}
-                          </span>
-                        </div>
+
                       </div>
 
                       <!-- Project Description -->
