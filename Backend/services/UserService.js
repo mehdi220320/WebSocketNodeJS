@@ -53,6 +53,34 @@ class UserService {
     static async getUserByEmail(email) {
         return await UserModel.findOne({ email });
     }
+
+    static async activateUser(userId) {
+        try {
+            const user = await UserModel.findById(userId);
+            if (!user) throw new Error("User not found");
+
+            user.isActivated = true;
+            return await user.save();
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    static async assignTeamLeader(userId, teamLeaderId) {
+        try {
+            const user = await UserModel.findById(userId);
+            if (!user) throw new Error("User not found");
+
+            if (user.role !== "Dev") {
+                throw new Error("Only Devs can be assigned a Team Leader");
+            }
+
+            user.teamLeader = teamLeaderId;
+            return await user.save();
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
 }
 
 module.exports = UserService;

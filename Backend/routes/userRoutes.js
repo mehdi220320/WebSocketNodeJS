@@ -9,5 +9,7 @@ router.get("/",authvalidator, UserController.getAllUsers);
 router.get("/:id", UserController.getUserById);
 router.put("/:id", UserController.updateUser);
 router.delete("/:id", UserController.deleteUser);
-
+router.put("/:id/activate", UserController.activateUser);
+router.put("/:id/assign-team-leader", UserController.assignTeamLeader);
+router.get("/team-leader/:teamLeaderId", UserController.getUsersByTeamLeader);
 module.exports = router;

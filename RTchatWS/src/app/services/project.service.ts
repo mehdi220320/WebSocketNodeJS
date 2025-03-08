@@ -42,9 +42,9 @@ export class ProjectService {
    listenForTaskAssignments() {
      return this.chatService.getTaskUpdates();
    }
-   emitNewProject(project: any) {
-     this.chatService.sendProject(project);
-   }
+   // emitNewProject(project: any) {
+   //   this.chatService.sendProject(project);
+   // }
 
    private getHttpOptions() {
     const headers = new HttpHeaders({

@@ -63,7 +63,17 @@ class TaskController {
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
+    static async getTasksByUser(req, res) {
+        try {
+            const userId = req.params.userId;
+            const tasks = await TaskService.getTasksByUserId(userId);
 
+            res.status(200).json(tasks);
+        } catch (error) {
+            console.error("Error fetching tasks for user:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
     static async deleteTask(req, res) {
         try {
             const taskId = req.params.id;

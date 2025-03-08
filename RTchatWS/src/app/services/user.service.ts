@@ -20,6 +20,17 @@ export class UserService {
     return this.http.get<any>(`${this.apiUrl}/${userId}`, this.getHttpOptions());
   }
 
+  activateUser(userId: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${userId}/activate`, {}, this.getHttpOptions());
+  }
+
+  assignTeamLeader(userId: string, teamLeaderId: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${userId}/assign-team-leader`,
+      { teamLeaderId }, this.getHttpOptions());
+  }
+  getUsersByTeamLeader(teamLeaderId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/team-leader/${teamLeaderId}`, this.getHttpOptions());
+  }
   private getHttpOptions() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

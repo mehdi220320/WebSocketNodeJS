@@ -24,7 +24,14 @@ class TaskService {
             throw new Error('Error fetching tasks: ' + error.message);
         }
     }
-
+    static async getTasksByUserId(userId) {
+        try {
+            const tasks = await TaskModel.find({ assignedTo: userId });
+            return tasks;
+        } catch (error) {
+            throw new Error("Error fetching tasks for user");
+        }
+    }
     static async getTaskById(taskId) {
         try {
             return await TaskModel.findById(taskId).populate('assignedTo', 'name').populate('project');

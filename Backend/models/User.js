@@ -5,7 +5,9 @@ class User {
         this.id = id;
         this.name = name;
         this.role = role;
+        this.teamLeader = teamLeader;
         this.isActivated = isActivated;
+
     }
 }
 
@@ -16,7 +18,8 @@ const userSchema = new mongoose.Schema(
         password: { type: String, required: true },
         role: { type: String, enum: ["Admin", "TeamLeader", "Dev"], default: "User" },
         token: { type: String },
-        isActivated: { type: Boolean, default: false }
+        isActivated: { type: Boolean, default: false },
+        teamLeader: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null }
     },
     { timestamps: true }
 );

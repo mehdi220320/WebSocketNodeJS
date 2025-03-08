@@ -29,6 +29,8 @@ class AuthController {
                 password,
                 role: role ,
                 token: token,
+                isActivated: false,
+                teamLeader: null,
             });
 
             if (!newUser) {

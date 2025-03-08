@@ -67,6 +67,44 @@ class UserController {
             res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     }
+    static async activateUser(req, res) {
+        try {
+            const { id } = req.params;
+            const updatedUser = await UserService.activateUser(id);
+            res.status(200).json({ message: "User activated successfully", user: updatedUser });
+        } catch (error) {
+            console.error("Error activating user:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
+        }
+    }
+
+    static async assignTeamLeader(req, res) {
+        try {
+            const { id } = req.params;
+            const { teamLeaderId } = req.body;
+
+            if (!teamLeaderId) {
+                return res.status(400).json({ message: "Team Leader ID is required" });
+            }
+
+            const updatedUser = await UserService.assignTeamLeader(id, teamLeaderId);
+            res.status(200).json({ message: "Team leader assigned successfully", user: updatedUser });
+        } catch (error) {
+            console.error("Error assigning team leader:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
+        }
+    }
+    static async getUsersByTeamLeader(req, res) {
+        try {
+            const { teamLeaderId } = req.params;
+            const users = await UserModel.find({ teamLeader: teamLeaderId });
+
+            res.status(200).json({ message: "Users fetched successfully", users });
+        } catch (error) {
+            console.error("Error fetching users by team leader:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
+        }
+    }
 }
 
 module.exports = UserController;
