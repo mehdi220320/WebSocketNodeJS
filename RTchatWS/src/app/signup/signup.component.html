@@ -1,4 +1,19 @@
-<div class="login-root">
+<nav class="navbar">
+  <div class="logo">Building</div>
+
+  <div class="nav-links">
+    <a routerLink="/" >Home</a>
+    <a routerLink="/signup" class="active">Signup</a>
+    <a routerLink="/login" >Login</a>
+    <a href="#">FAQs</a>
+  </div>
+
+  <button class="contact-btn">Contact us</button>
+
+</nav>
+
+
+<div class="login-root ">
   <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
     <div class="loginbackground box-background--white padding-top--64">
       <div class="loginbackground-gridContainer">
@@ -32,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="margin-top:35px;flex-grow: 1; z-index: 9;">
       <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
         <h1><a href="http://localhost:4200" rel="dofollow">Signup</a></h1>
       </div>
@@ -88,7 +103,8 @@
                 </label>
               </div>
               <div class="field padding-bottom--24">
-                <button type="submit" style="background: #5469d4; width: 100%;">Continue</button>              </div>
+                <button type="submit"  class="btn btn-primary" style="background: #5469d4; width: 100%;">Continue</button>
+              </div>
 
             </form>
           </div>

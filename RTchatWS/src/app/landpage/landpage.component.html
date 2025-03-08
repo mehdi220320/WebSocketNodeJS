@@ -1,31 +1,109 @@
-<header >
-  <nav class=" my-nav navbar navbar-light navbar-expand-lg ">
-    <div class="container">
-      <a class="navbar-brand" href="#">Welcome</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" >Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item" style="cursor: pointer">
-            <a class="nav-link" routerLink="login">Login</a>
-          </li>
-          <li class="nav-item" style="cursor: pointer" >
-            <a class="nav-link"  routerLink="signup">Signup</a>
-          </li>
+<nav class="navbar">
+  <div class="logo">Project Management</div>
 
-        </ul>
+  <div class="nav-links">
+    <a routerLinkActive="/" class="active">Home</a>
+    <a routerLink="/signup">Signup</a>
+    <a routerLink="/login">Login</a>
+    <a href="#">FAQs</a>
+  </div>
+
+  <button class="contact-btn">Contact us</button>
+
+  <button class="mobile-menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu">
+  <a href="#" class="active">Home</a>
+  <a href="#">Our Home Models</a>
+  <a href="#">Who We Are</a>
+  <a href="#">What We Do & Why</a>
+  <a href="#">FAQs</a>
+  <button class="contact-btn">Contact us</button>
+</div>
+
+<main class="hero">
+  <div class="hero-content">
+    <h1>✨ Structure Your Projects, Empower Your Teams
+      <span class="thumbnail">
+        <img src="assets/img_2.png" style="background: #f9c23c" alt="Modern interior thumbnail">
+      </span>
+    </h1>
+    <div class="cta-container">
+      <button class="booking-btn">
+        Booking a consultant
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="circular-image" >
+      <img style="background: #f9c23c" src="assets/img_2.png" alt="Modern interior">
+    </div>
+  </div>
+</main>
+<section class="constr-services">
+  <div class="features-header">
+    <span class="features-label">NEED TO KNOW</span>
+    <h2 class="features-title">
+      <span class="decorative-dash">~</span>
+      Our Services
+      <span class="decorative-dash">~</span>
+    </h2>
+  </div>
+
+  <div class="constr-grid">
+    <div class="constr-card">
+      <div class="constr-blob constr-blob-1"></div>
+      <div class="constr-content">
+        <h3>General Contracting</h3>
+        <p>Managing the entire construction process under a single contractor for seamless execution.</p>
       </div>
     </div>
-  </nav>
 
-  <div id="carouselExampleIndicators" class="carousel slide my-carousel my-carousel" data-ride="carousel">
-    <div class="carousel-inner" role="listbox">
-      <div class="carousel-item active" style="background-image: url('https://i.imgur.com/NnzxG4S.jpg')">
+    <div class="constr-card">
+      <div class="constr-blob constr-blob-2"></div>
+      <div class="constr-content">
+        <h3>Special Projects</h3>
+        <p>Handling unique, specialized, or non-routine construction and development projects.</p>
+      </div>
+    </div>
+
+    <div class="constr-card">
+      <div class="constr-blob constr-blob-3"></div>
+      <div class="constr-content">
+        <h3>House Renovation</h3>
+        <p>Transforming and upgrading homes through remodeling and renovation services.</p>
       </div>
     </div>
   </div>
-</header>
+</section>
+<section class="info-section">
+  <div class="info-header">
+    <div class="background-shape"></div>
+    <h2>Information About Us</h2>
+    <p>Join our team and work with us</p>
+  </div>
+  <div class="info-stats">
+    <div class="stat">
+      <h3 class="stat-number" data-target="230">1590</h3>
+      <p>Complete projects</p>
+    </div>
+    <div class="stat">
+      <h3 class="stat-number" data-target="24">1550</h3>
+      <p>Locations</p>
+    </div>
+    <div class="stat">
+      <h3 class="stat-number" data-target="500">16900</h3>
+      <p>Satisfied clients</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  ©Copyrights Verified && Made with ❤ By Med Mehdi X Med Jaouher
+</footer>

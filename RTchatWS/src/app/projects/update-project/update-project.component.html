@@ -1,26 +1,56 @@
-<div class="update-project">
-  <h2>Update Project</h2>
+<div class="d-flex flex-column" id="content-wrapper">
+  <div id="content">
+    <div class="container-fluid">
+      <div class="card shadow mb-2" style="height: 105px;align-items: center;">
+        <h3 style="padding: 27px" class="text-dark mb-4">Create Project</h3>
+      </div>
+      <div class="card shadow" style="height: fit-content">
+        <div class="card-header py-3">
+          <p class="text m-0 fw-bold">Create Project</p>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="col-12 px-0 mb-4">
+              <div class="container-box">
+                <section style="width: 100%">
+                  <div class="contact-form">
+                    <form (ngSubmit)="updateProject()"  autocomplete="off">
+                      <div class="form-group" >
+                        <label for="name">Project Name:</label>
+                        <input type="text" id="name" [(ngModel)]="projectToUpdate.name" name="name" required />
+                      </div>
 
-  <form (ngSubmit)="updateProject()">
-    <div>
-      <label for="name">Project Name:</label>
-      <input id="name" [(ngModel)]="projectToUpdate.name" name="name" required />
+                      <div class="form-group">
+                        <label for="description">Project Description:</label>
+                        <input type="text" id="description" [(ngModel)]="projectToUpdate.description" name="description" />
+                      </div>
+
+                      <div class="form-group" style="width: 870px;">
+                        <label for="status">Project Status:</label>
+                        <select id="status" [(ngModel)]="projectToUpdate.status" name="status"  style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;">
+                          <option value="Pending">Pending</option>
+                          <option value="In Progress">In Progress</option>
+                          <option value="Completed">Completed</option>
+                        </select>
+                      </div>
+
+                      <button       class="btn btn-primary" style="text-align:center;
+                                                                    width:250px;
+                                                                    margin-left: 230px;
+                                                                    margin-top:15px;"
+                                    type="submit">Update Project</button>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div>
-      <label for="description">Project Description:</label>
-      <input id="description" [(ngModel)]="projectToUpdate.description" name="description" />
-    </div>
-
-    <div>
-      <label for="status">Project Status:</label>
-      <select id="status" [(ngModel)]="projectToUpdate.status" name="status">
-        <option value="Pending">Pending</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
-      </select>
-    </div>
-
-    <button type="submit">Update Project</button>
-  </form>
+  </div>
 </div>
+
+
+
+
