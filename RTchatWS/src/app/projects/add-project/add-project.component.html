@@ -15,15 +15,11 @@
                 <section style="width: 100%">
                   <div class="contact-form">
                     <form autocomplete="off" (ngSubmit)="createProject()">
-                      <!-- Project Title -->
                       <div class="form-group">
                         <label for="Title">Title:</label>
                         <input type="text" id="Title" name="Title" [(ngModel)]="projectDetails.name" required />
                       </div>
 
-
-
-                      <!-- Select Team Members -->
                       <div class="form-group" style="width: 870px;">
                         <label for="users">Team Leader:</label>
                         <select
