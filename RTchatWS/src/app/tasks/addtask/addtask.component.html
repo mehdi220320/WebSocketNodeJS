@@ -1,0 +1,67 @@
+<div class="d-flex flex-column" id="content-wrapper">
+  <div id="content">
+    <div class="container-fluid">
+      <div class="card shadow mb-2" style="height: 105px; align-items: center;">
+        <h3 style="padding: 27px" class="text-dark mb-4">Create Task</h3>
+      </div>
+      <div class="card shadow" style="height: fit-content">
+        <div class="card-header py-3">
+          <p class="text m-0 fw-bold">Create Task</p>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="col-12 px-0 mb-4">
+              <div class="container-box">
+                <section style="width: 100%">
+                  <div class="contact-form">
+                    <form autocomplete="off" (ngSubmit)="createTask()">
+                      <!-- Task Title -->
+                      <div class="form-group">
+                        <label for="Title">Title:</label>
+                        <input type="text" id="Title" name="Title" [(ngModel)]="taskDetails.title" required />
+                      </div>
+
+                      <!-- Task Description -->
+                      <div class="form-group">
+                        <label for="Description">Description:</label>
+                        <textarea id="Description" name="Description" rows="5" [(ngModel)]="taskDetails.description" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="assignedTo">Assign User</label>
+                        <select id="assignedTo" class="form-control" [(ngModel)]="selectedUserId" name="assignedTo" required>
+                          <option *ngFor="let user of users" [value]="user._id">
+                            {{ user.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <!-- Task Status -->
+                      <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select id="status" [(ngModel)]="taskDetails.status" name="status">
+                          <option value="To Do">Pending</option>
+                          <option value="In Progress">In Progress</option>
+                          <option value="Completed">Completed</option>
+                        </select>
+                      </div>
+
+                      <!-- Task Due Date -->
+                      <div class="form-group">
+                        <label for="dueDate">Due Date:</label>
+                        <input id="dueDate" type="date" [(ngModel)]="taskDetails.dueDate" name="dueDate" />
+                      </div>
+
+                      <!-- Submit Button -->
+                      <button type="submit" class="btn btn-primary" style="text-align:center; width:250px; margin-left: 230px; margin-top:15px;">
+                        Create
+                      </button>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

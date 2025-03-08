@@ -11,6 +11,8 @@ import { ChatService } from '../services/chat.service';
 export class ProjectsComponent implements OnInit {
   projects: any[] = [];
   newProject: any = {};
+  expandedProjectIds: Set<string> = new Set();
+
   tryby: string = "time";
   currentPage: number = 1;
   recordsPerPage: number = 5;
@@ -71,37 +73,23 @@ export class ProjectsComponent implements OnInit {
       const userRole = localStorage.getItem('userRole');
       const userId = localStorage.getItem('userId');
 
-      if (!userRole || !userId) {
-        console.error('Error: User role or ID is missing');
-        return;
-      }
-
-      if (!newProject || !newProject._id) {
-        console.error('Error: Invalid project data:', newProject);
+      if (!userRole || !userId || !newProject || !newProject._id) {
+        console.error('Error: Invalid project data or missing user info');
         return;
       }
 
       const projectExists = this.projects.some(project => project._id === newProject._id);
 
       if (!projectExists) {
-        if (userRole === 'Admin') {
+        if (userRole === 'Admin' || (userRole === 'TeamLeader' && newProject.teamLeader === userId)) {
           this.projects = [...this.projects, newProject];
-          console.log('new project added (Admin):', newProject);
-        }
-        else if (userRole === 'TeamLeader' && newProject.teamLeader === userId) {
+          console.log('New project added:', newProject);
+        } else if (userRole === 'Dev' && newProject.assignedTo.includes(userId)) {
           this.projects = [...this.projects, newProject];
-          console.log('new project added (TeamLeader):', newProject);
-        }
-        else if (userRole === 'Dev') {
-          if (newProject.assignedTo.includes(userId)) {
-            this.projects = [...this.projects, newProject];
-            console.log('new project added ff (Dev):', newProject);
-          } else {
-            console.log(' ignoring:', newProject._id);
-          }
+          console.log('New project added for Dev:', newProject);
         }
       } else {
-        console.log('skipping:', newProject._id);
+        console.log('Skipping duplicate project:', newProject._id);
       }
     });
   }
@@ -119,21 +107,21 @@ export class ProjectsComponent implements OnInit {
         const projectId = task.project;
 
         if (this.projects.some(project => project._id === projectId)) {
-          console.log(' Project already exists, skipping:', projectId);
+          console.log('Project already exists, skipping:', projectId);
           return;
         }
 
         this.projectService.getProjectById(projectId).subscribe((newProject) => {
           if (!newProject || Object.keys(newProject).length === 0) {
-            console.error(' Error: Invalid project data received:', newProject);
+            console.error('Error: Invalid project data received:', newProject);
             return;
           }
 
           if (!this.projects.some(project => project._id === newProject._id)) {
             this.projects.push(newProject);
-            console.log(' New project added for Dev:', newProject);
+            console.log('New project added for Dev:', newProject);
           } else {
-            console.log(' Project already in list after fetch, skipping:', newProject._id);
+            console.log('Project already in list, skipping:', newProject._id);
           }
         });
       }
@@ -151,6 +139,14 @@ export class ProjectsComponent implements OnInit {
           console.error('Error deleting project:', error);
         }
       );
+    }
+  }
+
+  toggleTasks(projectId: string): void {
+    if (this.expandedProjectIds.has(projectId)) {
+      this.expandedProjectIds.delete(projectId);
+    } else {
+      this.expandedProjectIds.add(projectId);
     }
   }
 
@@ -192,8 +188,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   try(tryby: string) {
-    this.tryby=tryby;
+    this.tryby = tryby;
     this.fetchProjects();
-
   }
 }

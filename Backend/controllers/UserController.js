@@ -1,6 +1,6 @@
 require("dotenv").config();
 const UserService = require("../services/userService");
-
+const { UserModel } = require("../models/User");
 class UserController {
     static async getUserByEmail(email) {
         return await User.findOne({ email });

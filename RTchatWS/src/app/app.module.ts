@@ -17,6 +17,7 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
 import { UpdateProjectComponent } from './projects/update-project/update-project.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { AddtaskComponent } from './tasks/addtask/addtask.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
     UpdateProjectComponent,
     TasksComponent,
     AddTaskComponent,
+    AddtaskComponent,
   ],
     imports: [
         BrowserModule,

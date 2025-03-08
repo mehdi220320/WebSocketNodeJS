@@ -68,16 +68,47 @@
                     <a class="btn btn-danger"  (click)="deleteProject(project._id)">
                       <i class="fas fa-trash"></i> Delete
                     </a>
+                    <button class="btn btn-success" (click)="toggleTasks(project._id)">
+                      <i class="fas" [ngClass]="expandedProjectIds.has(project._id) ? 'fa-minus' : 'fa-plus'"></i>
+                      {{ expandedProjectIds.has(project._id) ? 'Hide Tasks' : 'Show Tasks' }}
+                    </button>
+                  </td>
+
+                </tr>
+                <!-- Button to toggle tasks for each project -->
+
+
+                <!-- Tasks displayed under each project when it's expanded -->
+                <tr *ngFor="let project of projects">
+                  <td colspan="5" *ngIf="expandedProjectIds.has(project._id)">
+                    <div *ngIf="project.tasks && project.tasks.length > 0">
+                      <h5>Tasks:</h5>
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th>Task Title</th>
+                          <th>Description</th>
+                          <th>Assigned To</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let task of project.tasks">
+                          <td>{{ task.title }}</td>
+                          <td>{{ task.description }}</td>
+                          <td>{{ task.assignedTo }}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div *ngIf="!project.tasks || project.tasks.length === 0">
+                      <p>No tasks available for this project.</p>
+                    </div>
                   </td>
                 </tr>
                 </tbody>
-                <tfoot>
-
-                </tfoot>
               </table>
             </div>
           </div>
-
           <!-- Pagination -->
           <div class="row">
             <div class="col-md-6 align-self-center">
