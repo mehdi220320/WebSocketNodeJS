@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {ProjectService} from '../../services/project.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-project',
@@ -16,7 +17,8 @@ export class AddProjectComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route:Router
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +69,9 @@ export class AddProjectComponent implements OnInit {
     this.projectService.createProject(newProject).subscribe(
       (project) => {
         console.log('Project created:', project);
+        this.route.navigate(['/projects']);
+
+
       },
       (error) => {
         console.error('Error creating project:', error);

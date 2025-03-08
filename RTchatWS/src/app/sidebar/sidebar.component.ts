@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from '@angular/router';
-import {Observable} from 'rxjs';
+import { NavigationEnd, Router} from '@angular/router';
 import { createPopper, Instance } from '@popperjs/core';
 
 @Component({

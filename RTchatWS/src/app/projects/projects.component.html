@@ -14,12 +14,11 @@
             <div class="col-md-6 text-nowrap">
               <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
                 <label class="form-label">
-                  Show&nbsp;
-                  <select class="d-inline-block form-select form-select-sm" [(ngModel)]="recordsPerPage" (change)="onRecordsPerPageChange(recordsPerPage)">
-                    <option value="10" selected>10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                  Show By&nbsp;
+                  <select class="d-inline-block form-select form-select-sm" [(ngModel)]="tryby" (change)=" try(tryby)">
+                    <option value="time" selected>Time</option>
+                    <option value="status">Status</option>
+                    <option value="title">Title</option>
                   </select>&nbsp;
                 </label>
               </div>
@@ -53,7 +52,13 @@
                 <tr *ngFor="let project of projects">
                   <td>{{ project._id }}</td>
                   <td>{{ project.name }}</td>
-                  <td>{{ project.status }}</td>
+                  <td >
+                    <i *ngIf="project.status==='In Progress'" class="fa fa-solid fa-spinner" style="font-size: x-large; color:#FDD835" ></i>
+                    <i *ngIf="project.status==='Pending'" class="fa fa-solid  fa-hourglass-start" style="font-size: x-large; color:#90A4AE" ></i>
+                    <i  *ngIf="project.status==='Completed'"class="fa fa-solid fa-check" style="font-size: x-large; color:#1B5E20" ></i>
+                  {{ project.status }}  </td>
+                  <td>
+
                   <td>
                     <a class="btn btn-primary" [routerLink]="['/projects/update/', project._id]" >
                       <i class="fas fa-edit"></i> Edit
