@@ -1,5 +1,6 @@
 const TaskService = require("../services/taskService");
 const { getSocket } = require("../socket/socket"); // Import the socket helper
+const ProjectService = require("../services/projectService");
 
 class TaskController {
     static async createTask(req, res) {
@@ -7,9 +8,12 @@ class TaskController {
             const { title, description, assignedTo, project, status, dueDate } = req.body;
             const newTask = await TaskService.createTask({ title, description, assignedTo, project, status, dueDate });
 
+            const updatedProject = await ProjectService.getProjectById(project);
+
             const io = getSocket();
             if (io) {
                 io.emit("taskCreated", newTask);
+                io.emit("projectUpdated", updatedProject);
             }
 
             res.status(201).json({ message: "Task created successfully", task: newTask });

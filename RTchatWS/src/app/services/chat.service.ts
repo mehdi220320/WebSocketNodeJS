@@ -13,13 +13,17 @@ export class ChatService {
     this.socket = io(this.serverUrl);
   }
   sendProject(project: any): void {
-    this.socket.emit('sendProject', project); // Emit a project-related event
+    this.socket.emit('sendProject', project);
   }
-
+  getTaskUpdates(): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on('taskCreated', (task) => observer.next(task));
+    });
+  }
   getProjectUpdates(): Observable<any> {
     return new Observable(observer => {
-      this.socket.on('projectCreated', (project) => observer.next(project)); // Listen for project creation
-      this.socket.on('projectUpdated', (project) => observer.next(project)); // Listen for project updates
+      this.socket.on('projectCreated', (project) => observer.next(project));
+      this.socket.on('projectUpdated', (project) => observer.next(project));
     });
   }
   joinChat(username: string): void {

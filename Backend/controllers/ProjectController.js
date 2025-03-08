@@ -4,12 +4,12 @@ const { getSocket } = require("../socket/socket"); // Import the socket instance
 class ProjectController {
     static async createProject(req, res) {
         try {
-            const { name, description, createdBy, status, tasks } = req.body;
-            const newProject = await ProjectService.createProject({ name, description, createdBy, status, tasks });
+            const { name, description, createdBy, teamLeader, status, tasks } = req.body;
+            const newProject = await ProjectService.createProject({ name, description, createdBy, teamLeader, status, tasks });
 
-            const io = getSocket(); // Get the socket instance
+            const io = getSocket();
             if (io) {
-                io.emit("projectCreated", newProject); // Notify all clients
+                io.emit("projectCreated", newProject);
             }
 
             res.status(201).json({ message: "Project created successfully", project: newProject });
@@ -42,7 +42,17 @@ class ProjectController {
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
+    static async getProjectsByTeamLeader(req, res) {
+        try {
+            const teamLeaderId = req.params.teamLeaderId;
 
+            const projects = await ProjectService.getProjectsByTeamLeader(teamLeaderId);
+            res.status(200).json(projects);
+        } catch (error) {
+            console.error("Error fetching projects for team leader:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
     static async getProjectById(req, res) {
         try {
             const projectId = req.params.id;
@@ -81,7 +91,7 @@ class ProjectController {
 
             const io = getSocket();
             if (io) {
-                io.emit("projectDeleted", { id: projectId }); // Notify all clients
+                io.emit("projectDeleted", { id: projectId });
             }
 
             res.status(200).json({ message: "Project deleted successfully" });

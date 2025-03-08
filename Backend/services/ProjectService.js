@@ -12,7 +12,9 @@ class ProjectService {
 
     static async getAllProjects() {
         try {
-            return await ProjectModel.find().populate('createdBy', 'name').populate('tasks');
+            return await ProjectModel.find().populate('createdBy', 'name')
+                .populate('tasks')
+                .populate('teamLeader', 'name email')
         } catch (error) {
             throw new Error('Error fetching projects: ' + error.message);
         }
@@ -20,7 +22,10 @@ class ProjectService {
 
     static async getProjectById(projectId) {
         try {
-            return await ProjectModel.findById(projectId).populate('createdBy', 'name').populate('tasks');
+            return await ProjectModel.findById(projectId)
+                .populate('createdBy', 'name')
+                .populate('tasks')
+                .populate('teamLeader', 'name email') ;
         } catch (error) {
             throw new Error('Error fetching project by ID: ' + error.message);
         }
@@ -46,7 +51,8 @@ class ProjectService {
                 .populate({
                     path: "tasks",
                     populate: { path: "assignedTo", select: "name email" }
-                });
+                })
+                .populate('teamLeader', 'name email');
 
             return projects;
         } catch (error) {
@@ -54,7 +60,18 @@ class ProjectService {
         }
     }
 
+    static async getProjectsByTeamLeader(teamLeaderId) {
+        try {
+            const projects = await ProjectModel.find({ teamLeader: teamLeaderId })
+                .populate("createdBy", "name email")
+                .populate("tasks")
+                .populate("teamLeader", "name email");
 
+            return projects;
+        } catch (error) {
+            throw new Error("Error fetching projects for team leader: " + error.message);
+        }
+    }
 
 static async deleteProject(projectId) {
         try {
