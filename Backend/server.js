@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require('./routes/projectRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const authRoutes = require('./routes/authRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 const app = express();
 const server = http.createServer(app);
 const ProjectController = require("./controllers/ProjectController");
@@ -32,7 +33,7 @@ app.use("/users", userRoutes);
 app.use('/projects', projectRoutes);
 app.use('/tasks', taskRoutes);
 app.use('/auth', authRoutes);
-
+app.use('/chat',chatRoutes)
 
 app.get("/", (req, res) => {
     res.send(" Project & Task Manager API is running...");

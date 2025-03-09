@@ -12,7 +12,7 @@ import {AddtaskComponent} from './tasks/addtask/addtask.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path:'chat',component:ChatComponent},
+  {path:'chat/:chatID',component:ChatComponent},
   {path:'signup',component:SignupComponent},
   {path:'login',component:LoginComponent},
   {path:'',component:LandpageComponent},

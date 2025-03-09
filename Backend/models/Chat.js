@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const chatSchema = new mongoose.Schema({
-    project: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
+    project: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" ,unique:true,required:true}],
     messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
 }, { timestamps: true });
 

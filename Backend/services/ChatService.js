@@ -14,7 +14,7 @@ class ChatService {
 
     static async getAllChats() {
         try {
-            return await ChatModel.find().populate('project', 'name tasks')
+            return await ChatModel.find().populate('project', 'name')
         } catch (error) {
             throw new Error('Error fetching projects: ' + error.message);
         }
@@ -38,4 +38,4 @@ class ChatService {
     }
 }
 
-module.exports = ProjectService;
+module.exports = ChatService;

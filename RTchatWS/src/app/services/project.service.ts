@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { io, Socket } from 'socket.io-client';
-import { ChatService } from './chat.service';
+import { SocketIOService } from './SocketIO.service';
  @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
   private apiUrl = 'http://localhost:3000/projects';
-  constructor(private http: HttpClient ,         private chatService: ChatService  ) {}
+  constructor(private http: HttpClient ,         private chatService: SocketIOService  ) {}
 
   createProject(project: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/`, project, this.getHttpOptions());

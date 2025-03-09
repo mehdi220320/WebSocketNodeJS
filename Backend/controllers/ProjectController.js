@@ -1,15 +1,18 @@
 const ProjectService = require("../services/projectService");
-const { getSocket } = require("../socket/socket"); // Import the socket instance
-const ProjectModel = require('../models/Project'); // Adjust the path if needed
+const ChatService = require("../services/ChatService");
+const { getSocket } = require("../socket/socket");
+const ProjectModel = require('../models/Project');
+
 class ProjectController {
     static async createProject(req, res) {
         try {
             const { name, description, createdBy, teamLeader, status, tasks } = req.body;
             const newProject = await ProjectService.createProject({ name, description, createdBy, teamLeader, status, tasks });
-
+            const newChat=await  ChatService.createChat({project:newProject,messages:[]})
             const io = getSocket();
             if (io) {
                 io.emit("projectCreated", newProject);
+                io.emit("ChatCreated", newChat);
             }
 
             res.status(201).json({ message: "Project created successfully", project: newProject });

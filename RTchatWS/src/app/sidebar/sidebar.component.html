@@ -299,7 +299,7 @@
   </aside>
   <div id="overlay" class="overlay"></div>
   <div class="layout">
-    <main class="content" *ngIf="!WithSideBar(currentUrl)">
+    <main class="content" *ngIf="!WithSideBar(currentUrl)" style="    overflow-y: auto;height: 100%; width: 80%;">
      <router-outlet></router-outlet>
     </main>
     <div class="overlay"></div>

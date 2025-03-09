@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
-import { ChatService } from '../services/chat.service';
+import { SocketIOService } from '../services/SocketIO.service';
 
 @Component({
   selector: 'app-projects',
@@ -20,7 +20,7 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private chatService: ChatService
+    private chatService: SocketIOService
   ) {}
 
   ngOnInit(): void {
