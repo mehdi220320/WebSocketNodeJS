@@ -10,6 +10,7 @@ import {AddProjectComponent} from './projects/add-project/add-project.component'
 import {UpdateProjectComponent} from './projects/update-project/update-project.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {AddtaskComponent} from './tasks/addtask/addtask.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path:'chat',component:ChatComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'projects/update/:id', component: UpdateProjectComponent },
   {path:'tasks',component:TasksComponent},
   {path:'addtask',component:AddtaskComponent},
+  {path:'dashboard',component:DashboardComponent}
 
 ];
 

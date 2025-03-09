@@ -1,6 +1,6 @@
 const ProjectService = require("../services/projectService");
 const { getSocket } = require("../socket/socket"); // Import the socket instance
-
+const ProjectModel = require('../models/Project'); // Adjust the path if needed
 class ProjectController {
     static async createProject(req, res) {
         try {
@@ -100,6 +100,28 @@ class ProjectController {
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
+    static async getAllProjectsWithTasks(req, res) {
+        try {
+            const projects = await ProjectModel.find()
+                .populate({
+                    path: "tasks",
+                    model: "Task",
+                    select: "title assignedTo dueDate status progress",
+                })
+                .exec();
+
+            const io = getSocket();
+            if (io) {
+                io.emit("projectsFetchedWithTasks", projects);
+            }
+
+            res.status(200).json(projects);
+        } catch (error) {
+            console.error("Error fetching projects with tasks:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+
 }
 
 module.exports = ProjectController;
