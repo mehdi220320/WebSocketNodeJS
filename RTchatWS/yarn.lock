@@ -2698,6 +2698,11 @@
   "resolved" "https://registry.npmjs.org/detect-node/-/detect-node-2.1.0.tgz"
   "version" "2.1.0"
 
+"dhtmlx-gantt@^7.1.0":
+  "integrity" "sha512-yExLwld7NFi2kJqYYpWXCoKFrrnhLN4E99O3feeJc/ubF9p/nwItAcIZtlReii3sVHPcWXvYpomN6vhcht25ZQ=="
+  "resolved" "https://registry.npmjs.org/dhtmlx-gantt/-/dhtmlx-gantt-7.1.0.tgz"
+  "version" "7.1.0"
+
 "di@^0.0.1":
   "integrity" "sha512-uJaamHkagcZtHPqCIHZxnFrXlunQXgBOsZSUOWwFw31QJCAbyTBoHMW75YOTur5ZNx8pIeAKgf6GWIgaqqiLhA=="
   "resolved" "https://registry.npmjs.org/di/-/di-0.0.1.tgz"

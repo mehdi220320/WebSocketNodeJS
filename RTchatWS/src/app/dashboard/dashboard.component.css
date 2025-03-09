@@ -1,0 +1,71 @@
+#gantt_here {
+  width: 100%;
+  height: 500px;
+}
+
+.gantt_task_progress {
+  background-color: #3ea556;
+}
+
+.gantt_task_progress .gantt_task_progress_area {
+  overflow: hidden;
+  cursor: default;
+}
+
+.project-cards {
+  width: 50%;
+  margin-left: 20%;
+  margin-top: -3%;
+
+}
+
+.project-card {
+
+  padding-top: 10%;
+  margin-top: 3%;
+  padding-right: 10%;
+  padding: 10px;
+  text-align: center;
+  width: 30%;
+  display: inline-block;
+  border-radius: 5px;
+  margin-right: 1.5%;
+}
+.green-card {
+  background: linear-gradient(135deg, #4CAF50, #125316);
+}
+
+.red-card {
+  background: linear-gradient(135deg, #F44336, #682424);
+}
+
+.blue-card {
+  background: linear-gradient(135deg, #2196F3, #244d6d);
+}
+
+.yellow-card {
+  background: linear-gradient(135deg, #FFEB3B, #6d6526);
+  color: black;
+}
+
+.purple-card {
+  background: linear-gradient(135deg, #9C27B0, #64216e);
+}
+.turquoise-card {
+  background: linear-gradient(135deg, #47e9e9, #216e67);
+
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  width: 20%;
+}
+
+select {
+  width: 20%;
+}

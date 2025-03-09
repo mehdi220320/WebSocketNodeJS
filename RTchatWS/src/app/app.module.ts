@@ -18,6 +18,7 @@ import { UpdateProjectComponent } from './projects/update-project/update-project
 import { TasksComponent } from './tasks/tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { AddtaskComponent } from './tasks/addtask/addtask.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddtaskComponent } from './tasks/addtask/addtask.component';
     TasksComponent,
     AddTaskComponent,
     AddtaskComponent,
+    DashboardComponent,
   ],
     imports: [
         BrowserModule,

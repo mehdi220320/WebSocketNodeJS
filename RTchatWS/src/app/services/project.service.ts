@@ -39,6 +39,9 @@ export class ProjectService {
    listenForProjectUpdates(): Observable<any> {
      return this.chatService.getProjectUpdates();
    }
+   getAllProjectsWithTasks(): Observable<any[]> {
+     return this.http.get<any[]>(`${this.apiUrl}/with-tasks`, this.getHttpOptions());
+   }
    listenForTaskAssignments() {
      return this.chatService.getTaskUpdates();
    }

@@ -5,11 +5,11 @@ import {SignupComponent} from './signup/signup.component';
 import {LoginComponent} from './login/login.component';
 import {LandpageComponent} from './landpage/landpage.component';
 import {ProjectsComponent} from './projects/projects.component';
-import {SidebarComponent} from './sidebar/sidebar.component';
 import {AddProjectComponent} from './projects/add-project/add-project.component';
 import {UpdateProjectComponent} from './projects/update-project/update-project.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {AddtaskComponent} from './tasks/addtask/addtask.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path:'chat',component:ChatComponent},
@@ -21,6 +21,7 @@ const routes: Routes = [
   {path: 'projects/update/:id', component: UpdateProjectComponent },
   {path:'tasks',component:TasksComponent},
   {path:'addtask',component:AddtaskComponent},
+  {path:'dashboard',component:DashboardComponent}
 
 ];
 
