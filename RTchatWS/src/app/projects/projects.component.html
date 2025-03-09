@@ -53,10 +53,15 @@
                   <td>{{ project._id }}</td>
                   <td>{{ project.name }}</td>
                   <td >
-                    <i *ngIf="project.status==='In Progress'" class="fa fa-solid fa-spinner" style="font-size: x-large; color:#FDD835" ></i>
-                    <i *ngIf="project.status==='Pending'" class="fa fa-solid  fa-hourglass-start" style="font-size: x-large; color:#90A4AE" ></i>
-                    <i  *ngIf="project.status==='Completed'"class="fa fa-solid fa-check" style="font-size: x-large; color:#1B5E20" ></i>
-                  {{ project.status }}  </td>
+                   <span class="status-indicator"
+                         [ngClass]="{
+          'bg-secondary': project.status === 'Pending',
+          'bg-warning': project.status === 'In Progress',
+          'bg-success': project.status === 'Completed'
+        }"
+                         style="width: 12px; height: 12px; display: inline-block; border-radius: 50%; border: 2px solid #fff; margin-right: 5px;">
+  </span>
+                    {{ project.status }} </td>
                   <td>
 
                   <td>
