@@ -1,12 +1,14 @@
 const TaskService = require("../services/taskService");
-const { getSocket } = require("../socket/socket"); // Import the socket helper
+const { getSocket } = require("../socket/socket");
+const  TaskModel  = require('../models/Task');
+
 const ProjectService = require("../services/projectService");
 
 class TaskController {
     static async createTask(req, res) {
         try {
-            const { title, description, assignedTo, project, status, dueDate } = req.body;
-            const newTask = await TaskService.createTask({ title, description, assignedTo, project, status, dueDate });
+            const { title, description, assignedTo, project, status, dueDate , teamLeader } = req.body;
+            const newTask = await TaskService.createTask({ title, description, assignedTo, project, status, dueDate , teamLeader });
 
             const updatedProject = await ProjectService.getProjectById(project);
 
@@ -88,6 +90,24 @@ class TaskController {
         } catch (error) {
             console.error("Error deleting task:", error);
             res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+    static async getTasksByTeamLeader(req, res) {
+        try {
+            const { teamLeaderId } = req.params;
+
+            const tasks = await TaskModel.find({ teamLeader: teamLeaderId })
+                .populate("assignedTo", "email name")
+                .populate("project", "name");
+
+            if (!tasks || tasks.length === 0) {
+                return res.status(404).json({ message: "No tasks found for this team leader" });
+            }
+
+            res.status(200).json(tasks);
+        } catch (error) {
+            console.error("Error fetching tasks by team leader:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     }
 }

@@ -10,10 +10,13 @@ import { createPopper, Instance } from '@popperjs/core';
 })
 export class SidebarComponent implements OnInit{
   currentUrl: string = '';
+  userRole: string | null = null;
+
   UrlsWithSideBar:string []=['/','/login','/signup'];
   constructor(private route:Router,private el: ElementRef, private renderer: Renderer2) {
   }
   ngOnInit(){
+    this.userRole = localStorage.getItem('userRole');
     this.route.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;

@@ -26,7 +26,10 @@
                     </span>
                 <span class="menu-title">Dashboard</span>
                 <span class="menu-suffix">
-                      <span class="badge primary">Admin</span>
+                      <span class="badge primary" *ngIf="userRole == 'Admin'" >Admin</span>
+                    </span>
+                <span class="menu-suffix">
+                      <span class="badge bg-success" *ngIf="userRole == 'TeamLeader'">Teamleader</span>
                     </span>
               </a>
               <div class="sub-menu-list">
@@ -179,8 +182,67 @@
                 </ul>
               </div>
             </li>
+            <li class="menu-item sub-menu">
+              <a routerLink="/tasks">
+                    <span class="menu-icon">
+                 <i class="fa bi-card-checklist"></i>
+                    </span>
+                <span class="menu-title" *ngIf="userRole == 'Dev'">My tasks</span>
+                <span class="menu-title" *ngIf="userRole == 'TeamLeader'">Assigned Tasks</span>
+                <span class="menu-title" *ngIf="userRole == 'Admin'">All tasks</span>
 
 
+              </a>
+              <div class="sub-menu-list">
+                <ul>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Pie chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Line chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Bar chart</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="menu-item sub-menu"  *ngIf="userRole == 'TeamLeader'">
+              <a routerLink="/addtask">
+                    <span class="menu-icon">
+                 <i class="fa bi-plus-circle-fill"></i>
+                    </span>
+                <span class="menu-title">Add Task</span>
+
+
+
+              </a>
+              <div class="sub-menu-list">
+                <ul>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Pie chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Line chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Bar chart</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
 
             <li class="menu-header" style="padding-top: 20px"><span> Profile </span></li>
             <li class="menu-item">

@@ -9,4 +9,5 @@ router.get('/:id', TaskController.getTaskById);
 router.put('/:id', TaskController.updateTask);
 router.delete('/:id', TaskController.deleteTask);
 router.get("/user/:userId", TaskController.getTasksByUser);
+router.get("/team-leader/:teamLeaderId", TaskController.getTasksByTeamLeader);
 module.exports = router;

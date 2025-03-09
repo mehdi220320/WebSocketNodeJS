@@ -14,7 +14,17 @@
               <div class="container-box">
                 <section style="width: 100%">
                   <div class="contact-form">
+
                     <form autocomplete="off" (ngSubmit)="createTask()">
+                      <div class="form-group">
+
+                      <label for="project">Select Project:</label>
+                      <select id="project" [(ngModel)]="selectedProjectId" name="project" required>
+                        <option *ngFor="let project of projects" [value]="project._id">
+                          {{ project.name }}
+                        </option>
+                      </select>
+                      </div>
                       <!-- Task Title -->
                       <div class="form-group">
                         <label for="Title">Title:</label>

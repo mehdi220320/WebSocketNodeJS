@@ -41,7 +41,9 @@ export class TaskService {
   getTasksByUserId(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/user/${userId}`, this.getHttpOptions());
   }
-
+  getTasksByTeamLeaderId(teamLeaderId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/team-leader/${teamLeaderId}`, this.getHttpOptions());
+  }
   private getHttpOptions() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

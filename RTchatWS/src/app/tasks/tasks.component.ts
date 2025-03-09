@@ -10,12 +10,12 @@ import {TaskService} from '../services/task.service';
 export class TasksComponent {
   tasks: any[] = [];
   userId: string | null = null;
-
+  userRole: string | null = null;
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
-
+    this.userRole = localStorage.getItem('userRole');
     if (this.userId) {
       this.fetchTasks();
       this.listenForTaskUpdates();
@@ -25,20 +25,56 @@ export class TasksComponent {
   }
 
   fetchTasks(): void {
-    if (!this.userId) {
-      console.error('User ID is missing');
+    if (!this.userId || !this.userRole) {
+      console.error('User ID or Role is missing');
       return;
     }
 
-    this.taskService.getTasksByUserId(this.userId).subscribe(
-      (tasks) => {
-        this.tasks = tasks;
-        console.log('Tasks fetched:', this.tasks);
-      },
-      (error) => {
-        console.error('Error fetching tasks:', error);
-      }
-    );
+    if (this.userRole === 'Admin') {
+      this.taskService.getAllTasks().subscribe(
+        (tasks) => {
+          this.tasks = tasks;
+          console.log('All tasks fetched for Admin:', this.tasks);
+        },
+        (error) => {
+          console.error('Error fetching all tasks:', error);
+        }
+      );
+    } else if (this.userRole === 'TeamLeader') {
+      this.taskService.getTasksByTeamLeaderId(this.userId).subscribe(
+        (tasks) => {
+          this.tasks = tasks;
+          console.log('Tasks assigned to team leader:', this.tasks);
+        },
+        (error) => {
+          console.error('Error fetching team leader tasks:', error);
+        }
+      );
+    } else if (this.userRole === 'Dev') {
+      this.taskService.getTasksByUserId(this.userId).subscribe(
+        (tasks) => {
+          this.tasks = tasks;
+          console.log('Tasks fetched for Dev:', this.tasks);
+        },
+        (error) => {
+          console.error('Error fetching user tasks:', error);
+        }
+      );
+    } else {
+      console.error('Unrecognized user role:', this.userRole);
+    }
+  }
+  updateTaskStatus(task: any): void {
+    if (task.status) {
+      this.taskService.updateTask(task._id, task).subscribe(
+        (updatedTask) => {
+          console.log('Task status updated successfully', updatedTask);
+        },
+        (error) => {
+          console.error('Error updating task status:', error);
+        }
+      );
+    }
   }
   listenForTaskUpdates(): void {
     this.taskService.listenForTaskUpdates().subscribe(
@@ -49,13 +85,10 @@ export class TasksComponent {
         const existingTaskIndex = this.tasks.findIndex(task => task.id === taskUpdate.id);
 
         if (taskUpdate.action === 'created') {
-          // Add new task
           this.tasks.push(taskUpdate);
         } else if (taskUpdate.action === 'updated' && existingTaskIndex !== -1) {
-          // Update existing task
           this.tasks[existingTaskIndex] = taskUpdate;
         } else if (taskUpdate.action === 'deleted' && existingTaskIndex !== -1) {
-          // Remove the deleted task
           this.tasks.splice(existingTaskIndex, 1);
           this.tasks = [...this.tasks];  // Trigger change detection
           console.log('Task deleted in real-time:', taskUpdate.id);

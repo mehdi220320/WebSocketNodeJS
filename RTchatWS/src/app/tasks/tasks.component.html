@@ -7,6 +7,15 @@
       <p>{{ task.description }}</p>
       <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
       <p><strong>Status:</strong> {{ task.status }}</p>
+      <div *ngIf="userRole == 'Dev'">
+        <label >Status:</label>
+        <select [(ngModel)]="task.status" (change)="updateTaskStatus(task)">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
       <button (click)="deleteTask(task._id)">Delete</button>
     </li>
   </ul>

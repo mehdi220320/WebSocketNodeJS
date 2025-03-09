@@ -20,7 +20,7 @@ const routes: Routes = [
   {path:'addProject',component:AddProjectComponent},
   {path: 'projects/update/:id', component: UpdateProjectComponent },
   {path:'tasks',component:TasksComponent},
-  {path:'addtask/:id',component:AddtaskComponent},
+  {path:'addtask',component:AddtaskComponent},
 
 ];
 
