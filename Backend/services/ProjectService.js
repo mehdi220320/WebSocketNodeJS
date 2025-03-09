@@ -72,6 +72,50 @@ class ProjectService {
             throw new Error("Error fetching projects for team leader: " + error.message);
         }
     }
+    static async getProjectsByUser(userId) {
+        try {
+            const userProjects = await ProjectModel.find({
+                $or: [{ createdBy: userId }, { teamLeader: userId }]
+            });
+
+            const userTasks = await TaskModel.find({ assignedTo: userId }).select("project");
+            const taskProjectIds = [...new Set(userTasks.map(task => task.project.toString()))];
+
+            const taskProjects = await ProjectModel.find({ _id: { $in: taskProjectIds } });
+
+            const allProjects = [...userProjects, ...taskProjects];
+            const distinctProjects = Array.from(new Map(allProjects.map(proj => [proj._id.toString(), proj])).values());
+
+            return distinctProjects;
+        } catch (error) {
+            console.error("Error fetching user projects:", error);
+            throw error;
+        }
+    }
+    static async getUserInvolvedProjects(userId) {
+        try {
+            // Fetch projects where the user is the creator or team leader
+            const directProjects = await ProjectModel.find({
+                $or: [{ createdBy: userId }, { teamLeader: userId }]
+            });
+
+            // Fetch tasks assigned to the user and get distinct project IDs
+            const tasks = await TaskModel.find({ assignedTo: userId }).select("project");
+            const taskProjectIds = [...new Set(tasks.map(task => task.project.toString()))];
+
+            // Fetch the projects from those tasks
+            const taskProjects = await ProjectModel.find({ _id: { $in: taskProjectIds } });
+
+            // Merge the results and remove duplicates
+            const allProjects = [...directProjects, ...taskProjects];
+            const uniqueProjects = Array.from(new Map(allProjects.map(p => [p._id.toString(), p])).values());
+
+            return uniqueProjects;
+        } catch (error) {
+            console.error("Error fetching user's involved projects:", error);
+            throw error;
+        }
+    }
 
 static async deleteProject(projectId) {
         try {
