@@ -16,10 +16,10 @@
                   <div class="form-group">
 
                     <form autocomplete="off" (ngSubmit)="createTask()">
-                      <div class="form-group">
+                      <div class="form-group" style="width: 250px">
 
                       <label for="project">Select Project:</label>
-                      <select id="project" [(ngModel)]="selectedProjectId" name="project" required>
+                      <select id="project" [(ngModel)]="selectedProjectId" name="project" style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;"  required>
                         <option *ngFor="let project of projects" [value]="project._id">
                           {{ project.name }}
                         </option>
@@ -45,7 +45,7 @@
                         </select>
                       </div>
                       <!-- Task Status -->
-                      <div class="form-group" style="width: 180px;">
+                      <div class="form-group" style="width: 250px;">
                         <label for="status">Status:</label>
                         <select id="status" class="form-group" style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;" [(ngModel)]="taskDetails.status" name="status">
                           <option value="To Do">Pending</option>
