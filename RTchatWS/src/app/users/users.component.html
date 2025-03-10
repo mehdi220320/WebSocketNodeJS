@@ -31,7 +31,9 @@
                   <strong>{{ user.name }}</strong><br>
                   <small>{{ user.email }}</small>
                 </div>
-                <button class="btn btn-success" (click)="toggleActivation(user._id)">
+                <button  class="btn"
+                         [ngClass]="user.isActivated ? 'btn-danger' : 'btn-success'"
+                         (click)="toggleActivation(user._id)">
                   {{ user.isActivated ? 'Deactivate' : 'Activate' }}
                 </button>
               </li>

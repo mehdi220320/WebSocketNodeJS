@@ -256,7 +256,7 @@
 
               </a>
             </li>
-            <li class="menu-item sub-menu">
+            <li class="menu-item sub-menu" *ngIf="userRole == 'Admin'">
               <a routerLink="/users">
                     <span class="menu-icon">
 <i class="bi bi-people"></i>
