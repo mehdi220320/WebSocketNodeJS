@@ -44,6 +44,9 @@ export class ProjectService {
    getAllProjectsWithTasks(): Observable<any[]> {
      return this.http.get<any[]>(`${this.apiUrl}/with-tasks`, this.getHttpOptions());
    }
+   getProjectsWithTasksforteamleader(projectId: any): Observable<any[]> {
+     return this.http.get<any[]>(`${this.apiUrl}/teamleader/with-tasks/${projectId}`, this.getHttpOptions());
+   }
    listenForTaskAssignments() {
      return this.chatService.getTaskUpdates();
    }

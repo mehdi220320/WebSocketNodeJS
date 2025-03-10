@@ -127,7 +127,27 @@ class ProjectController {
                 .populate({
                     path: "tasks",
                     model: "Task",
-                    select: "title assignedTo dueDate status progress",
+                })
+                .exec();
+
+            const io = getSocket();
+            if (io) {
+                io.emit("projectsFetchedWithTasks", projects);
+            }
+            res.status(200).json(projects);
+        } catch (error) {
+            console.error("Error fetching projects with tasks:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+    static async getProjectswithtasksByTeamLeader(req, res) {
+        try {
+            const { teamLeaderId } = req.params;
+
+            const projects = await ProjectModel.find({ teamLeader: teamLeaderId })
+                .populate({
+                    path: "tasks",
+                    model: "Task",
                 })
                 .exec();
 
@@ -138,11 +158,10 @@ class ProjectController {
 
             res.status(200).json(projects);
         } catch (error) {
-            console.error("Error fetching projects with tasks:", error);
+            console.error("Error fetching projects for team leader:", error);
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
-
 }
 
 module.exports = ProjectController;

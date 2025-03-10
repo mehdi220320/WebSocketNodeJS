@@ -19,14 +19,14 @@
         <nav class="menu open-current-submenu">
           <ul>
             <li class="menu-header"><span> GENERAL </span></li>
-            <li class="menu-item sub-menu">
+            <li class="menu-item sub-menu" *ngIf="userRole !== 'Dev'">
               <a routerLink="/dashboard" >
                     <span class="menu-icon">
                       <i class="fa fa-solid fa-chart-pie"></i>
                     </span>
                 <span class="menu-title" >Dashboard</span>
                 <span class="menu-suffix">
-                      <span class="badge primary" *ngIf="userRole == 'Admin'" >Admin</span>
+                        <span class="badge primary" *ngIf="userRole == 'Admin'" >Admin</span>
                     </span>
                 <span class="menu-suffix">
                       <span class="badge bg-success" *ngIf="userRole == 'TeamLeader'">Teamleader</span>
@@ -155,7 +155,7 @@
                 </ul>
               </div>
             </li>
-            <li class="menu-item sub-menu">
+            <li class="menu-item sub-menu" *ngIf="userRole == 'Admin'">
               <a routerLink="/addProject">
                     <span class="menu-icon">
                  <i class="fa fa-solid fa-plus"></i>

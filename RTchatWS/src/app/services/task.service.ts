@@ -26,7 +26,9 @@ export class TaskService {
   updateTask(taskId: string, updatedTask: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${taskId}`, updatedTask, this.getHttpOptions());
   }
-
+  gettasksStateStatistics(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/task-statistics`, this.getHttpOptions());
+  }
   deleteTask(taskId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${taskId}`, this.getHttpOptions());
   }

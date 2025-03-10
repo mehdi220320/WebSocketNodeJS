@@ -55,7 +55,7 @@ export class SidebarComponent implements OnInit{
 
   ngAfterViewInit(): void {
     this.sidebarEl = this.el.nativeElement.querySelector('#sidebar');
-    this.layoutEL = this.el.nativeElement.querySelector('.layout'); // Récupérer l'élément layout
+    this.layoutEL = this.el.nativeElement.querySelector('.layout');
     this.initPoppers();
     this.setupEventListeners();
   }
