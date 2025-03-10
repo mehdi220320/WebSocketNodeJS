@@ -104,9 +104,18 @@ class UserController {
             console.error("Error fetching users by team leader:", error.message);
             res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
+
     }
 
-
+    static async getInactiveUsers(req, res) {
+        try {
+            const inactiveUsers = await UserModel.find({ isActivated: false });
+            res.status(200).json({ users: inactiveUsers });
+        } catch (error) {
+            console.error("Error fetching inactive users:", error.message);
+            res.status(500).json({ message: "Internal Server Error", error: error.message });
+        }
+    }
 }
 
 module.exports = UserController;

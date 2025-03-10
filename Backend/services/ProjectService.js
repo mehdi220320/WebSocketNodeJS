@@ -124,6 +124,30 @@ static async deleteProject(projectId) {
             throw new Error('Error deleting project: ' + error.message);
         }
     }
+    static async getProjectStateStatistics() {
+        try {
+            const totalProjects = await ProjectModel.countDocuments();
+
+            const pendingCount = await ProjectModel.countDocuments({ status: 'Pending' });
+            const inProgressCount = await ProjectModel.countDocuments({ status: 'In Progress' });
+            const completedCount = await ProjectModel.countDocuments({ status: 'Completed' });
+
+            const pendingPercentage = totalProjects ? ((pendingCount / totalProjects) * 100).toFixed(2) : 0;
+            const inProgressPercentage = totalProjects ? ((inProgressCount / totalProjects) * 100).toFixed(2) : 0;
+            const completedPercentage = totalProjects ? ((completedCount / totalProjects) * 100).toFixed(2) : 0;
+
+            return {
+                totalProjects,
+                Pending: pendingPercentage,
+                InProgress: inProgressPercentage,
+                Completed: completedPercentage
+            };
+        } catch (error) {
+            console.error("Error calculating project statistics:", error);
+            throw new Error("Unable to fetch project statistics");
+        }
+    }
+
 }
 
 module.exports = ProjectService;

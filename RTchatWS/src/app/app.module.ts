@@ -19,6 +19,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { AddtaskComponent } from './tasks/addtask/addtask.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AddTaskComponent,
     AddtaskComponent,
     DashboardComponent,
+    UsersComponent,
   ],
     imports: [
         BrowserModule,

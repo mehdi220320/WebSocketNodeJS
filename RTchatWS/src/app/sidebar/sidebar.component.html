@@ -183,14 +183,16 @@
               </div>
             </li>
             <li class="menu-item sub-menu">
-              <a routerLink="/tasks">
+              <a routerLink="/tasks" (click)="clearNotification()">
                     <span class="menu-icon">
                  <i class="fa bi-card-checklist"></i>
                     </span>
                 <span class="menu-title" *ngIf="userRole == 'Dev'">My tasks</span>
                 <span class="menu-title" *ngIf="userRole == 'TeamLeader'">Assigned Tasks</span>
                 <span class="menu-title" *ngIf="userRole == 'Admin'">All tasks</span>
-
+                <span class="menu-suffix" *ngIf="newTaskNotification">
+      <span class="badge bg-danger text-white" >New Task Available!</span>
+    </span>
 
               </a>
               <div class="sub-menu-list">
@@ -254,6 +256,33 @@
 
               </a>
             </li>
+            <li class="menu-item sub-menu">
+              <a routerLink="/users">
+                    <span class="menu-icon">
+<i class="bi bi-people"></i>
+                    </span>
+                <span class="menu-title">Users</span>
+              </a>
+              <div class="sub-menu-list">
+                <ul>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Pie chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Line chart</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-title">Bar chart</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="menu-item">
               <a href="#">
                     <span class="menu-icon">
@@ -299,7 +328,7 @@
   </aside>
   <div id="overlay" class="overlay"></div>
   <div class="layout">
-    <main class="content" *ngIf="!WithSideBar(currentUrl)" style="    overflow-y: auto;height: 100%; width: 80%;">
+    <main class="content" *ngIf="!WithSideBar(currentUrl)" style="    overflow-y: auto;height: 100%; ">
      <router-outlet></router-outlet>
     </main>
     <div class="overlay"></div>

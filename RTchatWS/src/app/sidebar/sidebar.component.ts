@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import { NavigationEnd, Router} from '@angular/router';
 import { createPopper, Instance } from '@popperjs/core';
+import {SocketIOService} from '../services/SocketIO.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,9 +12,10 @@ import { createPopper, Instance } from '@popperjs/core';
 export class SidebarComponent implements OnInit{
   currentUrl: string = '';
   userRole: string | null = null;
-
+  userId: string | null = null;
+  newTaskNotification: boolean = false;
   UrlsWithSideBar:string []=['/','/login','/signup'];
-  constructor(private route:Router,private el: ElementRef, private renderer: Renderer2) {
+  constructor(private route:Router,private el: ElementRef, private renderer: Renderer2 ,     private socketService: SocketIOService) {
   }
   ngOnInit(){
     this.userRole = localStorage.getItem('userRole');
@@ -24,12 +26,28 @@ export class SidebarComponent implements OnInit{
 
       }
     });
+    this.userId = localStorage.getItem('userId');
+    if (this.userId) {
+      this.socketService.getTaskUpdatesForUser(this.userId).subscribe((task) => {
+        this.newTaskNotification = true;
+        console.log(this.newTaskNotification);
+      });
+    }
+
+    this.route.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = event.url;
+      }
+    });
+
   }
   WithSideBar(url: string): boolean {
     return this.UrlsWithSideBar.includes(url);
   }
 
-
+  clearNotification() {
+    this.newTaskNotification = false;
+  }
   private poppers: Instance[] = [];
   private readonly animationDuration = 300;
   sidebarEl: HTMLElement | null = null;

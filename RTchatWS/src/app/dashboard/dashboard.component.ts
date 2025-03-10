@@ -12,15 +12,30 @@ export class DashboardComponent implements OnInit {
   @ViewChild('gantt_here', { static: true }) ganttContainer!: ElementRef;
 
   constructor(private projectService: ProjectService) {}
-
+  totalProjects: any;
+  pendingPercentage: any;
+  inProgressPercentage: any;
+  completedPercentage: any;
   ngOnInit() {
     gantt.init(this.ganttContainer.nativeElement);
     this.loadProjectsWithTasks();
+    this.statisticsproj()
   }
+statisticsproj() {
+  this.projectService.getProjectStateStatistics().subscribe((response: any) => {
+    const stats = response.statistics;
+    this.totalProjects = stats.totalProjects;
+    this.pendingPercentage = stats.Pending;
+    this.inProgressPercentage = stats.InProgress;
+    this.completedPercentage = stats.Completed;
+  });
 
+}
   loadProjectsWithTasks() {
     this.projectService.getAllProjectsWithTasks().subscribe((projects: any[]) => {
       const formattedData = this.formatGanttData(projects);
+      console.log(formattedData);
+
       gantt.parse(formattedData);
     });
   }
@@ -35,16 +50,15 @@ export class DashboardComponent implements OnInit {
     gantt.config.drag_move = false;
 
     projects.forEach((project: any) => {
-      // Check if the project has tasks
       const hasTasks = project.tasks && project.tasks.length > 0;
 
       tasks.push({
         id: project._id,
         text: project.name,
         start_date: this.formatDate(project.createdAt),
-        duration: hasTasks ? project.tasks.length * 5 : 10, // Default duration for empty projects
+        duration: hasTasks ? project.tasks.length * 5 : 10,
         progress: 0,
-        type: "project", // Ensure it's a project
+        type: "project",
         open: true
       });
 
@@ -54,20 +68,28 @@ export class DashboardComponent implements OnInit {
             id: task._id,
             text: task.title,
             start_date: this.formatDate(task.dueDate),
-            duration: 5, // Default duration
+            duration: 5,
             progress: 0,
             parent: project._id,
-            type: "task" // Ensure these are tasks
+            type: "task"
           });
         });
       }
     });
 
-    return { data: tasks, links: [] }; // No links (arrows)
+    return { data: tasks, links: [] };
   }
-  formatDate(dateString: string): string {
-    if (!dateString) return new Date().toISOString().split('T')[0]; // Default to today
-    const date = new Date(dateString);
-    return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+  private formatDate(date: Date): string | null {
+    if (!date) return null;
+
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return null;
+
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+
+    return `${day}-${month}-${year}`;
   }
+
 }

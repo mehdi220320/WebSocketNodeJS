@@ -59,11 +59,13 @@ class UserService {
             const user = await UserModel.findById(userId);
             if (!user) throw new Error("User not found");
 
-            user.isActivated = true;
+            user.isActivated = !user.isActivated;
+
             return await user.save();
         } catch (error) {
             throw new Error(error.message);
         }
+
     }
 
     static async assignTeamLeader(userId, teamLeaderId) {

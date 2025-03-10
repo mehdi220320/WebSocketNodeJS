@@ -13,7 +13,9 @@ export class ProjectService {
   createProject(project: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/`, project, this.getHttpOptions());
   }
-
+   getProjectStateStatistics(): Observable<any> {
+     return this.http.get<any>(`${this.apiUrl}/project-statistics`, this.getHttpOptions());
+   }
   getAllProjects(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/`, this.getHttpOptions());
   }

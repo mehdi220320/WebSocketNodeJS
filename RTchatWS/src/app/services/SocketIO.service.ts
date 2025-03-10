@@ -21,7 +21,15 @@ export class SocketIOService {
       });
     });
   }
-
+  getTaskUpdatesForUser(userId: string): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on('taskCreated', (task) => {
+        if (task.assignedTo === userId) {
+          observer.next({ action: 'created', ...task });
+        }
+      });
+    });
+  }
   getProjectUpdates(): Observable<any> {
     return new Observable(observer => {
       this.socket.on('projectCreated', (project) => observer.next(project));

@@ -28,6 +28,9 @@ export class UserService {
     return this.http.put<any>(`${this.apiUrl}/${userId}/assign-team-leader`,
       { teamLeaderId }, this.getHttpOptions());
   }
+  getInactiveUsers(): Observable<{ users: any[] }> {
+    return this.http.get<{ users: any[] }>(`${this.apiUrl}/inactive-users`, this.getHttpOptions());
+  }
   getUsersByTeamLeader(teamLeaderId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/team-leader/${teamLeaderId}`, this.getHttpOptions());
   }

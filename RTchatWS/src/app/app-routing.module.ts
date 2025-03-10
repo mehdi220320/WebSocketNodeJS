@@ -10,6 +10,7 @@ import {UpdateProjectComponent} from './projects/update-project/update-project.c
 import {TasksComponent} from './tasks/tasks.component';
 import {AddtaskComponent} from './tasks/addtask/addtask.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {UsersComponent} from './users/users.component';
 
 const routes: Routes = [
   {path:'chat/:chatID',component:ChatComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'projects/update/:id', component: UpdateProjectComponent },
   {path:'tasks',component:TasksComponent},
   {path:'addtask',component:AddtaskComponent},
-  {path:'dashboard',component:DashboardComponent}
+  {path:'dashboard',component:DashboardComponent},
+  {path:'users',component:UsersComponent}
 
 ];
 
