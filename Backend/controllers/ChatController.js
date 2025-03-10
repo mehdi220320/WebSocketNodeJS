@@ -13,6 +13,28 @@ class ChatController {
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
+    static async getChatById(req,res){
+        try {
+            const chatID=req.params.id;
+            const chat = await ChatService.getChatByID(chatID);
+            res.status(200).json(chat);
+
+        } catch (error) {
+            console.error("Error fetching chat:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+    static async getChatByUserId(req,res){
+        try {
+            const userId=req.params.id;
+            const chats = await ChatService.getChatsByUserId(userId);
+            res.status(200).json(chats);
+
+        } catch (error) {
+            console.error("Error fetching chat:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
     static async getAllChats(req, res) {
         try {
             const chats = await ChatService.getAllChats();

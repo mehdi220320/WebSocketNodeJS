@@ -11,7 +11,26 @@ class ChatService {
             throw new Error('Error creating chat: ' + error.message);
         }
     }
+    static async getChatsByUserId(userId) {
+        try {
+            const projects = await ProjectService.getUserInvolvedProjects(userId);
+            let chats = [];
 
+            for (let proj of projects) {
+                const chat = await this.getChatByProjectId(proj._id);
+                if (Array.isArray(chat)) {
+                    chats = chats.concat(chat);
+                } else {
+                    chats.push(chat);
+                }
+            }
+
+            return chats;
+
+        } catch (error) {
+            throw new Error('Error fetching chats: ' + error.message);
+        }
+    }
     static async getAllChats() {
         try {
             return await ChatModel.find().populate('project', 'name')
@@ -19,10 +38,17 @@ class ChatService {
             throw new Error('Error fetching projects: ' + error.message);
         }
     }
-
+    static async getChatByID(chatId){
+        try {
+            return await ChatModel.findById(chatId)
+                .populate('project', 'name')
+        }catch (error) {
+            throw new Error('Error fetching chat by project ID: ' + error.message);
+        }
+    }
     static async getChatByProjectId(projectId) {
         try {
-            let chat=await ChatModel.findByProjectID(projectId)
+            let chat=await ChatModel.findByProjectID(projectId).populate('project', 'name')
             if (!chat || chat.length === 0) {
                 const project =await ProjectService.getProjectById(projectId);
                 if(!project || project.length===0){

@@ -6,10 +6,10 @@ const ProjectModel = require('../models/Project');
 class ProjectController {
     static async createProject(req, res) {
         try {
+            const io = getSocket();
             const { name, description, createdBy, teamLeader, status, tasks } = req.body;
             const newProject = await ProjectService.createProject({ name, description, createdBy, teamLeader, status, tasks });
             const newChat=await  ChatService.createChat({project:newProject,messages:[]})
-            const io = getSocket();
             if (io) {
                 io.emit("projectCreated", newProject);
                 io.emit("ChatCreated", newChat);
