@@ -27,31 +27,33 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.chatID = params.get('chatID') || '';
-      if (this.chatID) {
+      if (this.chatID!=='0' && this.chatID) {
         console.log("Chat ID from route:", this.chatID);
         this.chatService.joinChat(this.chatID);
         this.loadMessages();
-      }
-    });
-    this.chatService.getChatById(this.chatID).subscribe((data)=>{
-      this.chat=data;
-      console.log("chat",this.chat)
 
-    },(error)=>{
-      console.log(error)
-    })
-    this.newMessageSubscription = this.chatService.listenForNewMessages().subscribe((message) => {
-      console.log("New message received:", message); // Check if messages are arriving
-      this.messages.push({
-        sender: Array.isArray(message.sender) && message.sender.length > 0 ? message.sender[0] : { _id: message.sender, name: 'Unknown' },
-        content: message.content,
-        createdAt: new Date(message.createdAt)
-      });
+        this.chatService.getChatById(this.chatID).subscribe((data)=>{
+          this.chat=data;
+          console.log("chat",this.chat)
+
+        },(error)=>{
+          console.log(error)
+        })
+        this.newMessageSubscription = this.chatService.listenForNewMessages().subscribe((message) => {
+          console.log("New message received:", message); // Check if messages are arriving
+          this.messages.push({
+            sender: Array.isArray(message.sender) && message.sender.length > 0 ? message.sender[0] : { _id: message.sender, name: 'Unknown' },
+            content: message.content,
+            createdAt: new Date(message.createdAt)
+          });
+        });
+      }
+      this.chatService.getChatByUser(this.userName).subscribe((data)=>{
+        this.chats=data
+        console.log("chats :",this.chats)
+      })
+
     });
-    this.chatService.getChatByUser(this.userName).subscribe((data)=>{
-      this.chats=data
-      console.log("chats :",this.chats)
-    })
 
   }
 
