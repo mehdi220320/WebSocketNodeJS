@@ -1,29 +1,232 @@
-.tasks-container {
-  padding: 20px;
+
+.card-strip {
+  background-color: #fff;
+  padding: 25px;
+  width: 950px;
+  margin: 20px auto;
+  border-radius: 3px;
+  box-shadow: 0px 8px 16px 0px #E0E0E0;
 }
 
-h2 {
-  font-size: 24px;
+.dark-text {
+  color: #000;
+}
+
+.extended-title {
+  color: #757575;
+  background-color: #E0E0E0;
+  padding: 1px 5px;
+}
+
+.fa-star {
+  color: #E0E0E0;
+}
+
+.fa-star.active {
+  color: #FFC400;
+}
+
+.green-block {
+  color: #00695C;
+  background-color: #B2DFDB;
+  padding: 3px 20px;
+  border-radius: 2px;
+}
+
+.comp-logo {
+  width: 70px;
+  height: 80px;
+}
+
+.v-line {
+  width: 1px;
+  background-color: #E0E0E0;
+  margin-right: 50px;
+}
+
+.blue-text {
+  color: #00B8D4;
+}
+
+.price-fall {
+  font-size: 17px;
+}
+
+.btn-orange {
+  background-color: #FF9800;
+  color: #fff;
+}
+
+@media screen and (max-width: 1012px) {
+  .card-strip {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 859px) {
+  .v-line {
+    display: none;
+  }
+
+  .price {
+    width: 100%;
+    margin-left: 95px;
+  }
+}
+
+@media screen and (max-width: 529px) {
+  .price {
+    margin-left: 0px;
+  }
+}
+
+
+
+#header.header-inner-pages {
+  background: rgba(0, 125, 254, 255);
+  padding: 12px 0;
+}
+
+.container2 {
+  width: 80%;
+  margin: 20px auto;
+}
+h1 {
+  text-align: center;
+}
+.contact-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
   font-weight: bold;
+  margin-bottom: 5px;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-  padding: 15px;
+.form-group input[type="text"], .form-group input[type="email"], .form-group textarea {
+  width: 100%;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-h3 {
-  font-size: 18px;
-  margin: 0;
+.form-group textarea {
+  resize: vertical;
+}
+.button-49,
+.button-49:after {
+  width: 150px;
+  height: 76px;
+  line-height: 78px;
+  font-size: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  background: rgba(0, 125, 254, 255);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  box-shadow: 6px 0px 0px #00E6F6;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-p {
-  font-size: 14px;
+.button-49:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+
+  content: 'ALTERNATE TEXT';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #6528db  5%);
+  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
 }
+
+.button-49:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .button-49,
+  .button-49:after {
+    width: 200px;
+    height: 86px;
+    line-height: 88px;
+  }
+}
+.span_user{
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.span_user:hover{
+  background-color: #ddd;
+  color: red;
+
+}
+.delete{
+  color: white;
+}
+

@@ -46,6 +46,7 @@
                   <th>Status</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  <th>Show Tasks</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,15 +55,15 @@
                   <td>{{ project.name }}</td>
                   <td >
                    <span class="status-indicator"
-                         [ngClass]="{
-          'bg-secondary': project.status === 'Pending',
-          'bg-warning': project.status === 'In Progress',
-          'bg-success': project.status === 'Completed'
-        }"
+                                           [ngClass]="{
+                            'bg-secondary': project.status === 'Pending',
+                            'bg-warning': project.status === 'In Progress',
+                            'bg-success': project.status === 'Completed'
+                          }"
                          style="width: 12px; height: 12px; display: inline-block; border-radius: 50%; border: 2px solid #fff; margin-right: 5px;">
-  </span>
-                    {{ project.status }} </td>
-                  <td>
+                           </span>
+                    {{ project.status }}
+                  </td>
 
                   <td>
                     <a class="btn btn-primary" [routerLink]="['/projects/update/', project._id]" >
@@ -73,6 +74,9 @@
                     <a class="btn btn-danger"  (click)="deleteProject(project._id)">
                       <i class="fas fa-trash"></i> Delete
                     </a>
+
+                  </td>
+                  <td>
                     <button class="btn btn-success" (click)="toggleTasks(project._id)">
                       <i class="fas" [ngClass]="expandedProjectIds.has(project._id) ? 'fa-minus' : 'fa-plus'"></i>
                       {{ expandedProjectIds.has(project._id) ? 'Hide Tasks' : 'Show Tasks' }}
@@ -147,3 +151,18 @@
     </div>
   </div>
 </div>
+
+<button (click)="dialog.showModal();" class="btn btn-quick-link join-group-btn border w-100">See post</button>
+
+<dialog #dialog id="dialog">
+  <button (click)="dialog.close();" aria-label="close" class="x">❌</button>
+  <div class="dialogcard">
+    <div class="col-lg-7 post-images-content ">
+      <div class="d-block ">
+      </div>
+    </div>
+    <div class="card__content">
+
+    </div>
+  </div>
+</dialog>

@@ -16,96 +16,24 @@
                 <div class="modal__sidebar">
                   <div class="chat__search search">
                     <div class="search">
-                      <div class="search__icon">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                      </div>
-                      <input type="search" class="search__input" placeholder="Быстрый поиск">
+                      <h3>Chats</h3>
                       <div class="search__icon search__icon_right">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
-                  <div class="chat__users">
-                    <ul class="users">
-                      <li class="users__item users__item_group">
-                        <div class="users__avatar avatar">
-                          <a href="#" class="avatar__wrap">
-                            M
-                          </a>
-                        </div>
-                        <span class="users__note">MaximModus</span>
-                        <div class="users__counter">
-                          <span class="counter">99+</span>
-                        </div>
-                      </li>
-                      <li class="users__item">
+                  <div class="chat__users" >
+                    <ul class="users" *ngFor="let chat of chats">
+                      <li class="users__item" (click)="Navigate(chat._id)">
                         <div class="users__avatar avatar avatar_online">
-                          <a href="#" class="avatar__wrap">
-                            <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
+                          <a  class="avatar__wrap">
+                            <img class="avatar__img" src="assets/project.png" width="35" height="35" alt="avatar image">
                           </a>
                         </div>
-                        <span class="users__note">Thomas Brown</span>
+                        <span class="users__note">{{chat.project.length > 0 ? chat.project[0].name : 'No Project' }}</span>
                         <div class="users__counter">
                           <span class="counter">3</span>
                         </div>
-                      </li>
-                      <li class="users__item">
-                        <div class="users__avatar">
-                          <a href="#" class="avatar__wrap">
-                            <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                          </a>
-                        </div>
-                        <span class="users__note">Edward LeCriston</span>
-                        <div class="users__counter">
-                          <span class="counter">6</span>
-                        </div>
-                      </li>
-                      <li class="users__item">
-                        <div class="users__avatar avatar avatar_online">
-                          <a href="#" class="avatar__wrap">
-                            <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                          </a>
-                        </div>
-                        <span class="users__note">Christian Smitt</span>
-                        <div class="users__counter">
-                          <span class="counter">2</span>
-                        </div>
-                      </li>
-                      <li class="users__item">
-                        <div class="users__avatar avatar">
-                          <a href="#" class="avatar__wrap">
-                            <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                          </a>
-                        </div>
-                        <span class="users__note">Sandy Miller</span>
-                        <div class="counter"></div>
-                      </li>
-                      <li class="users__item">
-                        <div class="users__avatar avatar avatar_online">
-                          <a href="#" class="avatar__wrap">
-                            <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                          </a>
-                        </div>
-                        <span class="users__note">Princess Murphy</span>
-                        <div class="counter"></div>
-                      </li>
-                      <li class="users__item">
-                        <div class="users__avatar avatar">
-                          <a href="#" class="avatar__wrap">
-                            <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                          </a>
-                        </div>
-                        <span class="users__note">Artour Bargeman</span>
-                        <div class="counter"></div>
-                      </li>
-                      <li class="users__item">
-                        <div class="users__avatar avatar">
-                          <a href="#" class="avatar__wrap">
-                            <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                          </a>
-                        </div>
-                        <span class="users__note">Andrey Afonin</span>
-                        <div class="counter"></div>
                       </li>
                     </ul>
                   </div>
@@ -116,175 +44,42 @@
                       <div class="head">
                         <div class="head__avatar avatar avatar_larger">
                           <a href="#" class="avatar__wrap">
-                            M
+                            P
                           </a>
                         </div>
-                        <div class="head__title">MaximModus</div>
-                        <div class="head__note">
-                          <span>8 участников</span>
-                          <span class="head__icon"></span>
-                        </div>
+                        <div class="head__title">{{ chat.project.length > 0 ? chat.project[0].name : 'No Project' }}</div>
                       </div>
                     </div>
                     <div class="chatbox__row chatbox__row_fullheight">
                       <div class="chatbox__content">
-                        <div class="message">
+                        <div class="message" *ngFor="let message of messages">
                           <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
+                            <span class="message__note">{{message.sender.name}}</span>
+                            <span class="message__note">Time, {{getTimeSinceSent(message.createdAt)}}</span>
                           </div>
                           <div class="message__base">
                             <div class="message__avatar avatar">
                               <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
+                                <img class="avatar__img" src="assets/user.png" width="35" height="35" alt="avatar image">
                               </a>
                             </div>
-                            <div class="message__textbox" style="background: blue ;color:white">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                              <img class="message__smiley" src="http://www.pic4ever.com/images/14k8gag.gif" border="0">
+                            <div class="message__textbox" [ngStyle]="{'background': message.sender._id === userName ? 'blue' : '', 'color': message.sender._id === userName ? 'white' : ''}">
+                              <span class="message__text">{{message.content}}</span>
                             </div>
                           </div>
                         </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox" style="background: blue ;color:white">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox" style="background: blue ;color:white">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox" style="background: blue ;color:white">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="message">
-                          <div class="message__head">
-                            <span class="message__note">Princess Murphy</span>
-                            <span class="message__note">Вчера, 17:00</span>
-                          </div>
-                          <div class="message__base">
-                            <div class="message__avatar avatar">
-                              <a href="#" class="avatar__wrap">
-                                <img class="avatar__img" src="http://placehold.it/35x35" width="35" height="35" alt="avatar image">
-                              </a>
-                            </div>
-                            <div class="message__textbox" style="background: blue ;color:white">
-                              <span class="message__text">Hello, Bogdan! Yes, funny smiles</span>
-                              <img class="message__smiley" src="http://www.pic4ever.com/images/245.gif" border="0">
-                            </div>
-                          </div>
-                        </div>
+
                       </div>
                     </div>
                     <div class="chatbox__row">
                       <div class="enter">
                         <div class="enter__submit">
-                          <button class="button button_id_submit" type="submit">
+                          <button class="button button_id_submit" type="submit" (click)="sendMessage()" [disabled]="!messageInput.trim()">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                           </button>
                         </div>
                         <div class="enter__textarea">
-                          <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="Say message..."></textarea>
+                          <textarea  [(ngModel)]="messageInput" name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="Say message..."></textarea>
                         </div>
                       </div>
                     </div>
@@ -302,116 +97,4 @@
   </div>
 </div>
 
-<div class="chat-container">
-  <div class="chat-header">
-    <h2>Chat Room - {{ chatID }}</h2>
-    <p>Welcome, {{ userName }}</p>
-  </div>
 
-  <div class="user-list">
-    <h3>Users in the chat</h3>
-    <ul>
-      <li *ngFor="let user of userList">{{ user }}</li>
-    </ul>
-  </div>
-
-  <div class="message-list">
-    <h3>Messages</h3>
-    <div *ngFor="let message of messages" class="message">
-      <strong>{{ message.sender }}:</strong>
-      <p>{{ message.text }}</p>
-    </div>
-  </div>
-
-  <div class="message-input">
-    <textarea [(ngModel)]="messageInput" placeholder="Type a message..." rows="3"></textarea>
-    <button (click)="sendMessage()" [disabled]="!messageInput.trim()">Send</button>
-  </div>
-</div>
-
-<!-- CSS Styles -->
-<style>
-  .chat-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .chat-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .user-list, .message-list {
-    margin-bottom: 20px;
-  }
-
-  .user-list h3, .message-list h3 {
-    margin-bottom: 10px;
-  }
-
-  .user-list ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .user-list li {
-    margin: 5px 0;
-    padding: 5px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-  }
-
-  .message-list {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-  }
-
-  .message {
-    background-color: #e1f5fe;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  .message strong {
-    color: #0288d1;
-  }
-
-  .message-input {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .message-input textarea {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    resize: none;
-  }
-
-  .message-input button {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #0288d1;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .message-input button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-
-  .message-input button:hover:not(:disabled) {
-    background-color: #0277bd;
-  }
-</style>

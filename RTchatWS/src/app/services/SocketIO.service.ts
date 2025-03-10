@@ -49,10 +49,7 @@ export class SocketIOService {
   getMessages(chatID: string): Observable<any> {
     return new Observable(observer => {
       this.joinChat(chatID);
-      this.socket.on('messagesFetched', (messages) => {
-        console.log('Received messages for chat:', messages);
-        observer.next(messages);
-      });
+      this.socket.on('messagesFetched', (messages) => {observer.next(messages);});
     });
   }
 

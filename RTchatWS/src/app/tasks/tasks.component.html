@@ -1,22 +1,58 @@
-<div class="tasks-container">
-  <h2>Assigned Tasks</h2>
-  <div *ngIf="tasks.length === 0">No tasks assigned.</div>
-  <ul>
-    <li *ngFor="let task of tasks">
-      <h3>{{ task.title }}</h3>
-      <p>{{ task.description }}</p>
-      <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
-      <p><strong>Status:</strong> {{ task.status }}</p>
-      <div *ngIf="userRole == 'Dev'">
-        <label >Status:</label>
-        <select [(ngModel)]="task.status" (change)="updateTaskStatus(task)">
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
+<div class="d-flex flex-column" id="content-wrapper">
+  <div id="content">
+    <div class="container-fluid">
+      <div class="card shadow mb-2" style="height: 105px; align-items: center;">
+        <h3 style="padding: 27px" class="text-dark mb-4">Assigned  Tasks</h3>
       </div>
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <p class="text m-0 fw-bold">Tasks</p>
+        </div>
+        <div class="card-body">
+          <div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
+            <div *ngIf="tasks.length === 0">No tasks assigned.</div>
 
-      <button (click)="deleteTask(task._id)">Delete</button>
-    </li>
-  </ul>
+            <div class="row d-flex justify-content-start card-strip"*ngFor="let task of tasks">
+              <div class="info">
+                <div class="row px-3 mb-2">
+                  <h2 class="dark-text mr-4">Task Infos</h2>
+                </div>
+                <div class="row px-3 mb-2">
+                  <h4 class="dark-text mr-4">Title: <strong>{{task.title }}</strong></h4>
+                  <p class="mt-1 mr-4 extended-title">{{task.status}}</p>
+                </div>
+                <div class="row px-3">
+                  <p><span class="fa fa-clock-o"> {{task.description}}</span></p>
+                </div>
+                <div class="row px-3">
+                  <h6 class="green-block"> Due Date: {{ task.dueDate | date }}</h6>
+                </div>
+              </div>
+              <div class="v-line ml-auto"></div>
+              <div class="price">
+                <div *ngIf="userRole !='Dev'">
+                  <p class="mb-0">Action</p>
+                  <h4 class="blue-text mb-3">You can delete from here</h4>
+                </div>
+                <div class="form-group" style="width: 180px;" *ngIf="userRole == 'Dev'">
+                  <label >Status:</label>
+                  <select [(ngModel)]="task.status" (change)="updateTaskStatus(task)" style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;" >
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-danger mt-4" (click)="deleteTask(task._id)" style="width: 180px;">Delete</button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
