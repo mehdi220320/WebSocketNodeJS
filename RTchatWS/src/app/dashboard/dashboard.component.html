@@ -107,14 +107,14 @@
                     <div class="row align-items-center no-gutters">
                       <div class="col me-2">
                         <div class="text-uppercase text-success fw-bold text-xs mb-1">
-                          <span>Earnings (annual)</span>
+                          <span>Total tasks:</span>
                         </div>
                         <div class="text-dark fw-bold h5 mb-0">
-                          <span>$215,000</span>
+                          <span>{{ totaltask }}</span>
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        <i class="fas bi-card-checklist fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -126,14 +126,14 @@
                     <div class="row align-items-center no-gutters">
                       <div class="col me-2">
                         <div class="text-uppercase text-success fw-bold text-xs mb-1">
-                          <span>Earnings (annual)</span>
+                          <span>To do tasks:</span>
                         </div>
                         <div class="text-dark fw-bold h5 mb-0">
-                          <span>$215,000</span>
+                          <span>{{ ToDotasks }}%</span>
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        <i class="fas bi-file-arrow-up fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -145,25 +145,18 @@
                     <div class="row align-items-center no-gutters">
                       <div class="col me-2">
                         <div class="text-uppercase text-info fw-bold text-xs mb-1">
-                          <span>Tasks</span>
+                          <span>InProgress Tasks </span>
                         </div>
                         <div class="row g-0 align-items-center">
                           <div class="col-auto">
                             <div class="text-dark fw-bold h5 mb-0 me-3">
-                              <span>50%</span>
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="progress progress-sm">
-                              <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-                                <span class="visually-hidden">50%</span>
-                              </div>
+                              <span>{{ inProgresstasks }}%</span>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        <i class="fas bi-stopwatch fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -175,14 +168,14 @@
                     <div class="row align-items-center no-gutters">
                       <div class="col me-2">
                         <div class="text-uppercase text-warning fw-bold text-xs mb-1">
-                          <span>Pending Requests</span>
+                          <span>Completed tasks</span>
                         </div>
                         <div class="text-dark fw-bold h5 mb-0">
-                          <span>18</span>
+                          <span>{{ completedtasks }} %</span>
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <i class="fas bi-check2-circle fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>

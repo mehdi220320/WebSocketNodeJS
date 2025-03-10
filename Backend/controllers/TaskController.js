@@ -110,6 +110,15 @@ class TaskController {
             res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     }
+    static async getTaskStateStatistics(req, res) {
+        try {
+            const statistics = await TaskService.getTaskStateStatistics();
+            res.status(200).json({ statistics });
+        } catch (error) {
+            console.error("Error fetching task statistics:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
 }
 
 module.exports = TaskController;

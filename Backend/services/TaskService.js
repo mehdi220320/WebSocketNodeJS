@@ -39,7 +39,29 @@ class TaskService {
             throw new Error('Error fetching task by ID: ' + error.message);
         }
     }
+    static async getTaskStateStatistics() {
+        try {
+            const totalTasks = await TaskModel.countDocuments();
 
+            const toDoCount = await TaskModel.countDocuments({ status: "To Do" });
+            const inProgressCount = await TaskModel.countDocuments({ status: "In Progress" });
+            const completedCount = await TaskModel.countDocuments({ status: "Completed" });
+
+            const toDoPercentage = totalTasks ? ((toDoCount / totalTasks) * 100).toFixed(2) : 0;
+            const inProgressPercentage = totalTasks ? ((inProgressCount / totalTasks) * 100).toFixed(2) : 0;
+            const completedPercentage = totalTasks ? ((completedCount / totalTasks) * 100).toFixed(2) : 0;
+
+            return {
+                totalTasks,
+                ToDo: toDoPercentage,
+                InProgress: inProgressPercentage,
+                Completed: completedPercentage
+            };
+        } catch (error) {
+            console.error("Error calculating task statistics:", error);
+            throw new Error("Unable to fetch task statistics");
+        }
+    }
     static async updateTask(taskId, taskData) {
         try {
             return await TaskModel.findByIdAndUpdate(taskId, taskData, { new: true });

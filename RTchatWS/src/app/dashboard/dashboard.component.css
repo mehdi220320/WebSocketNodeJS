@@ -70,5 +70,20 @@ select {
   width: 20%;
 }
 
+.gantt_task_line.grey-task {
+  background-color: grey !important;
+}
+
+.gantt_task_line.green-task {
+  background-color: green !important;
+}
+
+.gantt_task_line.red-task {
+  background-color: red !important;
+}
+
+.gantt_task_line.blue-task {
+  background-color: blue !important;
+}
 
 
