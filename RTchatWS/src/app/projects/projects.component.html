@@ -46,7 +46,7 @@
                   <th>Status</th>
                   <th>Edit</th>
                   <th>Delete</th>
-                  <th>Show Tasks</th>
+                  <th> Tasks</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,42 +77,11 @@
 
                   </td>
                   <td>
-                    <button class="btn btn-success" (click)="toggleTasks(project._id)">
-                      <i class="fas" [ngClass]="expandedProjectIds.has(project._id) ? 'fa-minus' : 'fa-plus'"></i>
-                      {{ expandedProjectIds.has(project._id) ? 'Hide Tasks' : 'Show Tasks' }}
+                    <button class="btn btn-success" (click)="toggleTasks(project._id) ;dialog.showModal();">
+                      {{ expandedProjectIds.has(project._id) ? 'Hide ' : 'Show ' }}
                     </button>
                   </td>
 
-                </tr>
-                <!-- Button to toggle tasks for each project -->
-
-
-                <!-- Tasks displayed under each project when it's expanded -->
-                <tr *ngFor="let project of projects">
-                  <td colspan="5" *ngIf="expandedProjectIds.has(project._id)">
-                    <div *ngIf="project.tasks && project.tasks.length > 0">
-                      <h5>Tasks:</h5>
-                      <table class="table">
-                        <thead>
-                        <tr>
-                          <th>Task Title</th>
-                          <th>Description</th>
-                          <th>Assigned To</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let task of project.tasks">
-                          <td>{{ task.title }}</td>
-                          <td>{{ task.description }}</td>
-                          <td>{{ task.assignedTo }}</td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div *ngIf="!project.tasks || project.tasks.length === 0">
-                      <p>No tasks available for this project.</p>
-                    </div>
-                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -152,16 +121,41 @@
   </div>
 </div>
 
-<button (click)="dialog.showModal();" class="btn btn-quick-link join-group-btn border w-100">See post</button>
 
 <dialog #dialog id="dialog">
-  <button (click)="dialog.close();" aria-label="close" class="x">❌</button>
+  <button (click)="toggleTasks(this.togleprojectID);dialog.close(); " aria-label="close" class="x">❌</button>
   <div class="dialogcard">
     <div class="col-lg-7 post-images-content ">
       <div class="d-block ">
       </div>
     </div>
     <div class="card__content">
+      <tr *ngFor="let project of projects">
+        <td colspan="5" *ngIf="expandedProjectIds.has(project._id)">
+          <div *ngIf="project.tasks && project.tasks.length > 0">
+            <h5>Tasks:</h5>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Task Title</th>
+                <th>Description</th>
+                <th>Assigned To</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let task of project.tasks">
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.assignedTo }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="!project.tasks || project.tasks.length === 0">
+            <p>No tasks available for this project.</p>
+          </div>
+        </td>
+      </tr>
 
     </div>
   </div>

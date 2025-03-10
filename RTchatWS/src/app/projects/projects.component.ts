@@ -141,8 +141,9 @@ export class ProjectsComponent implements OnInit {
       );
     }
   }
-
+  togleprojectID:string="";
   toggleTasks(projectId: string): void {
+    this.togleprojectID=projectId;
     if (this.expandedProjectIds.has(projectId)) {
       this.expandedProjectIds.delete(projectId);
     } else {

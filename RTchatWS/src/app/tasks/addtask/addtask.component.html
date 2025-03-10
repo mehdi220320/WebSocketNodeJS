@@ -13,7 +13,7 @@
             <div class="col-12 px-0 mb-4">
               <div class="container-box">
                 <section style="width: 100%">
-                  <div class="contact-form">
+                  <div class="form-group">
 
                     <form autocomplete="off" (ngSubmit)="createTask()">
                       <div class="form-group">
@@ -45,9 +45,9 @@
                         </select>
                       </div>
                       <!-- Task Status -->
-                      <div class="form-group">
+                      <div class="form-group" style="width: 180px;">
                         <label for="status">Status:</label>
-                        <select id="status" [(ngModel)]="taskDetails.status" name="status">
+                        <select id="status" class="form-group" style="padding: 10px 15px; border-radius: 10px; transition: 0.3s ease; width: calc(107% - 30px); border: 2px solid #eae4da;" [(ngModel)]="taskDetails.status" name="status">
                           <option value="To Do">Pending</option>
                           <option value="In Progress">In Progress</option>
                           <option value="Completed">Completed</option>
